@@ -17,8 +17,6 @@ abstract public class Brick  {
     //public static final int MIN_CRACK = 1;    //Not using this in program
     public static final int DEF_CRACK_DEPTH = 1;
     public static final int DEF_STEPS = 35;
-
-
     public static final int UP_IMPACT = 100;
     public static final int DOWN_IMPACT = 200;
     public static final int LEFT_IMPACT = 300;
@@ -210,7 +208,7 @@ abstract public class Brick  {
         return  broken;
     }
 
-    public abstract Shape getBrick();
+    public abstract Shape getBrickFace();
 
 
 

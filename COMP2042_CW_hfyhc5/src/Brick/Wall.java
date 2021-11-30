@@ -79,6 +79,15 @@ public class Wall {
 
     }
 
+    private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
+        Brick[][] tmp = new Brick[LEVELS_COUNT][];
+        tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
+        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
+        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
+        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        return tmp;
+    }
+
     private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
@@ -168,15 +177,6 @@ public class Wall {
         setBall(new RubberBall(ballPos));   // call rubber ball constructor to set ball position
     }
 
-    private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
-        Brick[][] tmp = new Brick[LEVELS_COUNT][];
-        tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
-        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
-        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
-        return tmp;
-    }
-
     public void move(){
         getPlayer().move();
         getBall().move();
@@ -232,18 +232,6 @@ public class Wall {
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
     }
 
-    public int getBrickCount(){
-        return brickCount;
-    }
-
-    public int getBallCount(){
-        return ballCount;
-    }
-
-    public boolean isBallLost(){
-        return ballLost;
-    }
-
     public void ballReset(){
         getPlayer().moveTo(startPoint);
         getBall().moveTo(startPoint);
@@ -264,6 +252,24 @@ public class Wall {
             b.repair();
         brickCount = getBricks().length;
         ballCount = 3;
+    }
+
+    private Brick makeBrick(Point point, Dimension size, int type){
+        Brick out;
+        switch(type){
+            case CLAY:
+                out = new ClayBrick(point,size);
+                break;
+            case STEEL:
+                out = new SteelBrick(point,size);
+                break;
+            case CEMENT:
+                out = new CementBrick(point, size);
+                break;
+            default:
+                throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
+        }
+        return  out;
     }
 
     public boolean ballEnd(){
@@ -295,22 +301,16 @@ public class Wall {
         ballCount = 3;
     }
 
-    private Brick makeBrick(Point point, Dimension size, int type){
-        Brick out;
-        switch(type){
-            case CLAY:
-                out = new ClayBrick(point,size);
-                break;
-            case STEEL:
-                out = new SteelBrick(point,size);
-                break;
-            case CEMENT:
-                out = new CementBrick(point, size);
-                break;
-            default:
-                throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
-        }
-        return  out;
+    public int getBrickCount(){
+        return brickCount;
+    }
+
+    public int getBallCount(){
+        return ballCount;
+    }
+
+    public boolean isBallLost(){
+        return ballLost;
     }
 
     public Brick[] getBricks() {

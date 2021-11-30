@@ -1,7 +1,5 @@
 package Brick;
 
-import Brick.Brick;
-
 import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
@@ -45,7 +43,7 @@ public class CementBrick extends Brick {
 
 
     @Override
-    public Shape getBrick() {
+    public Shape getBrickFace() {
         return brickFace;
     }
 

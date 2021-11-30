@@ -46,7 +46,7 @@ public class SteelBrick extends Brick {
     }
 
     @Override
-    public Shape getBrick() {
+    public Shape getBrickFace() {
         return brickFace;
     }
 

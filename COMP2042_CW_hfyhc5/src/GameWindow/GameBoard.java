@@ -28,14 +28,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 
-
-
 public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
     private static final String CONTINUE = "Continue";
     private static final String RESTART = "Restart";
     private static final String EXIT = "Exit";
     private static final String PAUSE = "Pause Menu";
+    private static final String GUIDE = "Guide";    //add guide
     private static final int TEXT_SIZE = 30;
     private static final Color MENU_COLOR = new Color(0,255,0);
 
@@ -44,6 +43,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private static final int DEF_HEIGHT = 450;  //frame height
 
     private static final Color BG_COLOR = Color.WHITE;  //background color
+
+    //private GuideFrame guideFrame;
 
     private Timer gameTimer;
 
@@ -58,6 +59,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Rectangle continueButtonRect;
     private Rectangle exitButtonRect;
     private Rectangle restartButtonRect;
+    private Rectangle guideButtonRect;  //added guide button
     private int strLen;
 
     private DebugConsole debugConsole;
@@ -69,16 +71,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         strLen = 0;
         showPauseMenu = false;
 
-
-
         menuFont = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
-
 
         this.initialize();
         message = "";
-        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
+        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));   //call wall constructor
 
-        debugConsole = new DebugConsole(owner,wall,this);    //call debugConsole constructor
+        debugConsole = new DebugConsole(owner,wall,this);   //call debugConsole constructor
         //initialize the first level
         wall.nextLevel();
 
@@ -103,7 +102,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                     wall.nextLevel();
                 }
                 else{
-                    message = "CONGRATULATIONS! ALL WALLS DESTROYED";    //add congratulations
+                    message = "CONGRATULATIONS! ALL WALLS DESTROYED";   //add congratulations
                     gameTimer.stop();
                 }
             }
@@ -159,10 +158,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         Color tmp = g2d.getColor();
 
         g2d.setColor(brick.getInnerColor());
-        g2d.fill(brick.getBrick());
+        g2d.fill(brick.getBrickFace());
 
         g2d.setColor(brick.getBorderColor());
-        g2d.draw(brick.getBrick());
+        g2d.draw(brick.getBrickFace());
 
 
         g2d.setColor(tmp);
@@ -173,10 +172,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         Shape s = ball.getBallFace();   //get the shape of ball
 
-        g2d.setColor(ball.getInnerColor()); //Set color of the ball
+        g2d.setColor(ball.getInnerColor()); //get color of the ball
         g2d.fill(s);
 
-        g2d.setColor(ball.getBorderColor());    //set border color of the ball
+        g2d.setColor(ball.getBorderColor());    //get border color of the ball
         g2d.draw(s);
 
         g2d.setColor(tmp);
@@ -200,7 +199,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         drawPauseMenu(g2d);
     }
 
-    private void obscureGameBoard(Graphics2D g2d){  //remove game board
+    private void obscureGameBoard(Graphics2D g2d){      //remove game board
 
         Composite tmp = g2d.getComposite();
         Color tmpColor = g2d.getColor();
@@ -234,36 +233,46 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.drawString(PAUSE,x,y);
 
         x = this.getWidth() / 8;
-        y = this.getHeight() / 4;
+        y = this.getHeight() / 5;
 
 
-        if(continueButtonRect == null){
-            FontRenderContext frc = g2d.getFontRenderContext(); //display the CONTINUE button
+        if(continueButtonRect == null){     //display the CONTINUE button
+            FontRenderContext frc = g2d.getFontRenderContext();
             continueButtonRect = menuFont.getStringBounds(CONTINUE,frc).getBounds();
             continueButtonRect.setLocation(x,y-continueButtonRect.height);
         }
 
         g2d.drawString(CONTINUE,x,y);
 
-        y *= 2; //new line
+        y += 100; //new line
 
-        if(restartButtonRect == null){  //display the RESTART button
+        //display the RESTART button
+        if(restartButtonRect == null){
             restartButtonRect = (Rectangle) continueButtonRect.clone();
             restartButtonRect.setLocation(x,y-restartButtonRect.height);
         }
 
         g2d.drawString(RESTART,x,y);
 
-        y *= 3.0/2;
+        y += 100;
 
-        if(exitButtonRect == null){     //display EXIT button
+        //display GUIDE button
+        if(guideButtonRect == null){
+            guideButtonRect = (Rectangle) continueButtonRect.clone();
+            guideButtonRect.setLocation(x,y-guideButtonRect.height);
+        }
+
+        g2d.drawString(GUIDE,x,y);
+
+        y += 100;
+
+        //display EXIT button
+        if(exitButtonRect == null){
             exitButtonRect = (Rectangle) continueButtonRect.clone();
             exitButtonRect.setLocation(x,y-exitButtonRect.height);
         }
 
         g2d.drawString(EXIT,x,y);
-
-
 
         g2d.setFont(tmpFont);
         g2d.setColor(tmpColor);
@@ -274,7 +283,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
     @Override
-    public void keyPressed(KeyEvent keyEvent) {      //A & D in keyboard
+    public void keyPressed(KeyEvent keyEvent) {     //A & D in keyboard
         switch(keyEvent.getKeyCode()){
             case KeyEvent.VK_A:
                 wall.getPlayer().moveLeft();
@@ -284,7 +293,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 break;
             case KeyEvent.VK_ESCAPE:
                 showPauseMenu = !showPauseMenu; //make it true
-                repaint();
+                repaint();  //
                 gameTimer.stop();
                 break;
             case KeyEvent.VK_SPACE:
@@ -305,7 +314,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         wall.getPlayer().stop();
-    }    //when release A & D the bar stop
+    }   //when release A & D the bar stop
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
@@ -323,9 +332,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             showPauseMenu = false;
             repaint();
         }
+        /*else if(guideButtonRect.contains(p)){
+            guideFrame = new GuideFrame();
+        }*/
         else if(exitButtonRect.contains(p)){
             System.exit(0);
         }
+
 
     }
 
@@ -357,9 +370,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
-        if(exitButtonRect != null && showPauseMenu) {
-            if (exitButtonRect.contains(p) || continueButtonRect.contains(p) || restartButtonRect.contains(p))
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));  // change the cursor the hand
+        if(exitButtonRect != null && showPauseMenu) {   // change the cursor the hand
+            if (exitButtonRect.contains(p) || continueButtonRect.contains(p) || restartButtonRect.contains(p) || guideButtonRect.contains(p))
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             else
                 this.setCursor(Cursor.getDefaultCursor());
         }
