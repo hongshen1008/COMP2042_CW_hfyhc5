@@ -44,7 +44,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private static final Color BG_COLOR = Color.WHITE;  //background color
 
-    //private GuideFrame guideFrame;
+    private GuideFrame guideFrame;
 
     private Timer gameTimer;
 
@@ -332,9 +332,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             showPauseMenu = false;
             repaint();
         }
-        /*else if(guideButtonRect.contains(p)){
+        else if(guideButtonRect.contains(p)){
             guideFrame = new GuideFrame();
-        }*/
+        }
         else if(exitButtonRect.contains(p)){
             System.exit(0);
         }

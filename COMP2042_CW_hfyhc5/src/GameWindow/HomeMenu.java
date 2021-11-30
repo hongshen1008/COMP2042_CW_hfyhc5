@@ -33,11 +33,11 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private static final String CREDITS = "Version 0.2";
     private static final String START_TEXT = "Start";
     private static final String EXIT_TEXT = "Exit";     //changed to exit_text
-    private static final String GUIDE_TEXT = "Guide";     //add info button
+    private static final String GUIDE_TEXT = "Guide";     //added guide button
 
-    private static final Color BG_COLOR = new Color(10,225,225);  //changed to blue
-    private static final Color BORDER_COLOR = new Color(0, 0, 0); //Black
-    private static final Color DASH_BORDER_COLOR = new  Color(0, 0, 0);//Black
+    //private static final Color BG_COLOR = new Color(10,225,225);  //changed to blue
+    //private static final Color BORDER_COLOR = new Color(0, 0, 0); //Black
+    //private static final Color DASH_BORDER_COLOR = new  Color(0, 0, 0);//Black
     private static final Color TEXT_COLOR = new Color(0, 0, 0);//changed to black
     private static final Color CLICKED_BUTTON_COLOR = Color.BLUE.darker();
     private static final Color CLICKED_TEXT = Color.BLUE.darker();
@@ -58,7 +58,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private Font buttonFont;
 
     private GameFrame gameFrame;
-    //private Image background;
+    private Image background;
 
     private boolean startClicked;
     private boolean exitClicked;    //changed to exitClicked
@@ -123,21 +123,21 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     }
 
     private void drawContainer(Graphics2D g2d){
-        //background = new ImageIcon(getClass().getResource("/BrickBreaker2.jpg")).getImage();
-        //g2d.drawImage(background, 0,0,550,350,null);
+        background = new ImageIcon(getClass().getResource("/BrickBreaker2.jpg")).getImage();
+        g2d.drawImage(background, 0,0,550,350,null);
         Color prev = g2d.getColor();
 
-        g2d.setColor(BG_COLOR);
-        g2d.fill(menuFace);
+        //g2d.setColor(BG_COLOR);
+        //g2d.fill(menuFace);
 
         Stroke tmp = g2d.getStroke();
 
         g2d.setStroke(borderStoke_noDashes);
-        g2d.setColor(DASH_BORDER_COLOR);
+        //g2d.setColor(DASH_BORDER_COLOR);
         g2d.draw(menuFace);
 
-        g2d.setStroke(borderStoke);
-        g2d.setColor(BORDER_COLOR);
+        //g2d.setStroke(borderStoke);
+        //g2d.setColor(BORDER_COLOR);
         g2d.draw(menuFace);
 
         g2d.setStroke(tmp);
@@ -279,9 +279,9 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
             System.out.println("Goodbye " + System.getProperty("user.name"));
             System.exit(0);
         }
-        /*else if(guideButton.contains(p)){
+        else if(guideButton.contains(p)){
             new GuideFrame();
-        }*/
+        }
     }
 
     @Override
