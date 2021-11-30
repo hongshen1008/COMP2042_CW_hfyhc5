@@ -17,11 +17,11 @@
  */
 package GameWindow;
 
-import Ball.Ball;
+import GameObject.Ball;
 import Brick.Brick;
 import DebugWindow.DebugConsole;
 import Brick.Wall;
-import Ball.Player;
+import GameObject.Player;
 
 import javax.swing.*;
 import java.awt.*;

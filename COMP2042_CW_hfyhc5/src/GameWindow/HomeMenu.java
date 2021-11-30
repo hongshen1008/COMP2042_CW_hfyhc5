@@ -35,9 +35,6 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private static final String EXIT_TEXT = "Exit";     //changed to exit_text
     private static final String GUIDE_TEXT = "Guide";     //added guide button
 
-    //private static final Color BG_COLOR = new Color(10,225,225);  //changed to blue
-    //private static final Color BORDER_COLOR = new Color(0, 0, 0); //Black
-    //private static final Color DASH_BORDER_COLOR = new  Color(0, 0, 0);//Black
     private static final Color TEXT_COLOR = new Color(0, 0, 0);//changed to black
     private static final Color CLICKED_BUTTON_COLOR = Color.BLUE.darker();
     private static final Color CLICKED_TEXT = Color.BLUE.darker();
@@ -126,18 +123,12 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         background = new ImageIcon(getClass().getResource("/BrickBreaker2.jpg")).getImage();
         g2d.drawImage(background, 0,0,550,350,null);
         Color prev = g2d.getColor();
-
-        //g2d.setColor(BG_COLOR);
-        //g2d.fill(menuFace);
-
         Stroke tmp = g2d.getStroke();
 
         g2d.setStroke(borderStoke_noDashes);
-        //g2d.setColor(DASH_BORDER_COLOR);
+
         g2d.draw(menuFace);
 
-        //g2d.setStroke(borderStoke);
-        //g2d.setColor(BORDER_COLOR);
         g2d.draw(menuFace);
 
         g2d.setStroke(tmp);

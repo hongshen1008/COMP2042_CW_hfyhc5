@@ -1,10 +1,9 @@
 package Brick;
 
-import Ball.Ball;
+import GameObject.Ball;
 
 import java.awt.*;
 import java.awt.Point;
-import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
@@ -14,7 +13,6 @@ import java.util.Random;
  */
 abstract public class Brick  {
 
-    //public static final int MIN_CRACK = 1;    //Not using this in program
     public static final int DEF_CRACK_DEPTH = 1;
     public static final int DEF_STEPS = 35;
     public static final int UP_IMPACT = 100;

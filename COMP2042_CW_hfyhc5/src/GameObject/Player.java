@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Ball;
+package GameObject;
 
 import java.awt.*;
 
@@ -37,7 +37,7 @@ public class Player {
 
     public Player(Point ballPoint,int width,int height,Rectangle container) {   //player constructor
         this.ballPoint = ballPoint;
-        this.moveAmount = 0;                            //put this
+        stop();                           //change movement to stop method
         this.playerFace = makeRectangle(width, height); //put this
         this.min = container.x + (width / 2);           //put this
         this.max = min + container.width - width;       //put this

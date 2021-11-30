@@ -17,7 +17,7 @@
  */
 package DebugWindow;
 
-import Ball.Ball;
+import GameObject.Ball;
 import GameWindow.GameBoard;
 import Brick.Wall;
 

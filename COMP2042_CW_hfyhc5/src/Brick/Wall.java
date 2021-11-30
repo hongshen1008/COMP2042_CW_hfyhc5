@@ -17,9 +17,9 @@
  */
 package Brick;
 
-import Ball.Ball;
-import Ball.Player;
-import Ball.RubberBall;
+import GameObject.Ball;
+import GameObject.Player;
+import GameObject.RubberBall;
 
 import java.awt.*;
 import java.awt.geom.Point2D;

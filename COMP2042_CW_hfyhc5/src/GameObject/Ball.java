@@ -1,4 +1,4 @@
-package Ball;
+package GameObject;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
