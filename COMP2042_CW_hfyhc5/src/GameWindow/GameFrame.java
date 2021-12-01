@@ -46,7 +46,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.add(homeMenu,BorderLayout.CENTER);
 
         this.setUndecorated(true);
-
+        this.setResizable(false);
 
     }
 

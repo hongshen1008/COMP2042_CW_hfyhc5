@@ -65,7 +65,6 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
         this.setFocusable(true);
         this.requestFocusInWindow();
-
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         this.gameFrame = gameFrame;

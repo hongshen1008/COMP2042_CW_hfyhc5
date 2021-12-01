@@ -23,6 +23,7 @@ public class GuideFrame extends JFrame implements ActionListener {
         this.setLayout(null);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.add(guideTitle);
         this.add(backButton);
     }
