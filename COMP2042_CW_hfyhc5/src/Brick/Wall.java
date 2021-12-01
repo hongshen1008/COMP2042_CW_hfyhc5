@@ -72,7 +72,7 @@ public class Wall {
 
         getBall().setSpeed(speedX,speedY);
 
-        setPlayer(new Player((Point) ballPos.clone(),150,10, drawArea));     //call player constructor
+        this.player = new Player((Point) ballPos.clone(),150,10, drawArea);     //call player constructor
 
         area = drawArea;
 
@@ -331,9 +331,5 @@ public class Wall {
 
     public Player getPlayer() {
         return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 }

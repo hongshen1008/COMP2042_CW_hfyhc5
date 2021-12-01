@@ -75,7 +75,7 @@ public class Player {
     }
 
     public Shape getPlayerFace(){
-        return  playerFace;
+        return playerFace;
     }
 
     public void moveTo(Point p){    //player go to center

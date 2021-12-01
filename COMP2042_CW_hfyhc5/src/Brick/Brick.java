@@ -27,7 +27,6 @@ abstract public class Brick  {
 
     private Color border;
     private Color inner;
-
     private int fullStrength;
     private int strength;
 
@@ -47,16 +46,14 @@ abstract public class Brick  {
 
     protected abstract Shape makeBrickFace(Point pos,Dimension size);
 
+    public abstract Shape getBrickFace();
+
     public  boolean setImpact(Point2D point , int dir){
         if(broken)
             return false;
         impact();
         return  broken;
     }
-
-    public abstract Shape getBrickFace();
-
-
 
     public Color getBorderColor(){
         return  border;
