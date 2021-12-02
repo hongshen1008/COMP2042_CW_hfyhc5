@@ -6,8 +6,8 @@ import java.awt.geom.Point2D;
 
 public class Crack{
 
-        private static final int CRACK_SECTIONS = 3;
-        private static final double JUMP_PROBABILITY = 0.7;
+        //private static final int CRACK_SECTIONS = 3;
+        //private static final double JUMP_PROBABILITY = 0.7;
 
         public static final int LEFT = 10;
         public static final int RIGHT = 20;

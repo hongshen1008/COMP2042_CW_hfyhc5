@@ -28,6 +28,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 
+/**
+ * This is GameBoard class, used to start game and display Pause Menu.
+ *
+ * @author Chin Hong Shen
+ * @version 0.2
+ * @since 24 November 2021
+ */
 public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
     private static final String CONTINUE = "Continue";
@@ -65,6 +72,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private DebugConsole debugConsole;
 
 
+    /**
+     * This is GameBoard constructor. Perform instantiation and initialise variables.
+     *
+     * @param owner variable of JFrame, used to perform JFrame operations.
+     */
     public GameBoard(JFrame owner){
         super();
 
@@ -81,7 +93,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         //initialize the first level
         wall.nextLevel();
 
-        gameTimer = new Timer(10,e ->{
+        gameTimer = new Timer(10,e ->{  //maybe can move out to a method.
             wall.move();
             wall.findImpacts();
             message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),wall.getBallCount());
@@ -113,7 +125,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
 
-
+    /**
+     * This method is used to set Window's characteristic.
+     */
     private void initialize(){
         this.setPreferredSize(new Dimension(DEF_WIDTH,DEF_HEIGHT)); //set window size
         this.setFocusable(true);
@@ -124,6 +138,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
 
+    /**
+     * This method is used to deign the game objects and Pause menu.
+     *
+     * @param g variable of Graphics class used for drawing content.
+     */
     public void paint(Graphics g){  //repaint
 
         Graphics2D g2d = (Graphics2D) g;
@@ -147,6 +166,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         Toolkit.getDefaultToolkit().sync(); //synchronise
     }
 
+    /**
+     * This method is used to clear the background and set background to white color.
+     *
+     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     */
     private void clear(Graphics2D g2d){
         Color tmp = g2d.getColor();
         g2d.setColor(BG_COLOR);
@@ -154,6 +178,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmp);
     }
 
+    /**
+     * This method is used to design the brick.
+     *
+     * @param brick represents brick class object
+     * @param g2d represents Graphics2D class to perform operations of Graphics2D class
+     */
     private void drawBrick(Brick brick,Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -167,6 +197,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmp);
     }
 
+    /**
+     * This method is used to design the ball.
+     *
+     * @param ball represents Ball class
+     * @param g2d  represents Graphics2D class
+     */
     private void drawBall(Ball ball, Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -181,6 +217,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmp);
     }
 
+    /**
+     * This method is used to design player bar.
+     *
+     * @param p represents Player class
+     * @param g2d represents Graphics2D class
+     */
     private void drawPlayer(Player p, Graphics2D g2d){  //the bar to bounce the ball
         Color tmp = g2d.getColor();
 
@@ -194,12 +236,23 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmp);
     }
 
+    /**
+     * This method calls methods to draw Pause Menu.
+     *
+     * @param g2d represents Graphics2D class
+     */
     private void drawMenu(Graphics2D g2d){  //draw pause menu
         obscureGameBoard(g2d);
         drawPauseMenu(g2d);
     }
 
-    private void obscureGameBoard(Graphics2D g2d){      //remove game board
+    /**
+     * This method is used to hide GameBoard window when opened Pause Menu window.
+     * The GameBoard window will become translucent when the Pause Menu is opened.
+     *
+     * @param g2d represents Graphics2D class
+     */
+    private void obscureGameBoard(Graphics2D g2d){
 
         Composite tmp = g2d.getComposite();
         Color tmpColor = g2d.getColor();
@@ -214,6 +267,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmpColor);
     }
 
+    /**
+     * This method is used to set contents for PauseMenu window.
+     * Display Pause Menu title, locate Continue, Restart, Guide and Exit Button.
+     *
+     * @param g2d represents Graphics2D class
+     */
     private void drawPauseMenu(Graphics2D g2d){
         Font tmpFont = g2d.getFont();
         Color tmpColor = g2d.getColor();
@@ -278,10 +337,23 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setColor(tmpColor);
     }
 
+    /**
+     * This is a built-in method used to detect any key typed in Pause Menu window.
+     * Do Nothing in the program.
+     *
+     * @param keyEvent represent KeyEvent class
+     */
     @Override
     public void keyTyped(KeyEvent keyEvent) {
     }
 
+    /**
+     * This method is used to detect any key pressed during the game.
+     * Press A key to move left. Press D key to move right. Press escape key to open Pause Menu.
+     * Press Space bar to pause the game. Press Alt-Shift-F1 key to open debug Console.
+     *
+     * @param keyEvent represent KeyEvent class
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent) {     //A & D in keyboard
         switch(keyEvent.getKeyCode()){
@@ -293,7 +365,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 break;
             case KeyEvent.VK_ESCAPE:
                 showPauseMenu = !showPauseMenu; //make it true
-                repaint();  //
+                repaint();
                 gameTimer.stop();
                 break;
             case KeyEvent.VK_SPACE:
@@ -311,11 +383,26 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         }
     }
 
+    /**
+     * This method is used to detect key released in the game.
+     * If A & D key is released, stop the player bar.
+     *
+     * @param keyEvent represent KeyEvent class
+     */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         wall.getPlayer().stop();
     }   //when release A & D the bar stop
 
+    /**
+     * This is a built-in method used to detect mouse clicked in Pause Menu window.
+     * If continue button is clicked, go back to game.
+     * If restart button is clicked, prompts a message and restart the game.
+     * If guide button is clicked, open Guide window.
+     * If exit button is clicked, stop the game and close the window.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -342,31 +429,67 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     }
 
+    /**
+     * This is a built-in method used to detect mouse pressed in Pause Menu window.
+     * Do nothing in Pause Menu window.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * This is a built-in method is used to detect mouse released in Pause Menu window.
+     * Do nothing in Pause Menu.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * This is a built-in method used to detect mouse entered in Pause Menu window.
+     * Do Nothing in Pause Menu.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseEntered(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * This is a built-in method used to detect mouse Exited in Pause Menu window.
+     * Do Nothing in Pause Menu window.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseExited(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * This is a built-in method used to detect mouse dragged in Pause Menu window.
+     * Do Nothing in Pause Menu window.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * This is a built-in method used to detect mouse moved in Pause Menu window.
+     * If the mouse touches the button, the default arrow cursor become the hand cursor.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -381,6 +504,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         }
     }
 
+    /**
+     * This method is used to prompt the message "Focus Lost" when the game lost focus.
+     *
+     */
     public void onLostFocus(){
         gameTimer.stop();
         message = "Focus Lost";

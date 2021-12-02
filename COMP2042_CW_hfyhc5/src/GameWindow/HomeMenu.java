@@ -26,6 +26,13 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
 
+/**
+ * This is HomeMenu class. Design and locate content for HomeMenu window.
+ *
+ * @author Chin Hong Shen
+ * @version 0.2
+ * @since 24 November 2021
+ */
 public class HomeMenu extends JComponent implements MouseListener, MouseMotionListener {
 
     private static final String GREETINGS = "Welcome to:";
@@ -54,20 +61,26 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private Font creditsFont;
     private Font buttonFont;
 
-    private GameFrame gameFrame;
+    private GameFrame gameFrame;    //changed variable name
     private Image background;
 
     private boolean startClicked;
     private boolean exitClicked;    //changed to exitClicked
     private boolean guideClicked;    //when guide button clicked
 
-    public HomeMenu(GameFrame gameFrame,Dimension area){    //constructor
+    /**
+     * This is HomeMenu constructor. Design HomeMenu and perform instantiation.
+     *
+     * @param gameFrame perform aggregation relationship, is part of GameFrame class.
+     * @param area represents the area of the game window.
+     */
+    public HomeMenu(GameFrame gameFrame,Dimension area){    //constructor, changed owner to gameFrame
 
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
-        this.gameFrame = gameFrame;
+        this.gameFrame = gameFrame;     //changed owner to gameFrame
 
         menuFace = new Rectangle(new Point(0,0),area);
         this.setPreferredSize(area);
@@ -87,11 +100,21 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     }
 
 
+    /**
+     * This method is used to call method to deign the contents of Home Menu.
+     *
+     * @param g the variable of Graphics class used for drawing content.
+     */
     public void paint(Graphics g){
         drawMenu((Graphics2D)g);
     }
 
 
+    /**
+     * This method is used to design the content of the HomeMenu window.
+     *
+     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     */
     public void drawMenu(Graphics2D g2d){
 
         drawContainer(g2d);
@@ -118,6 +141,11 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         g2d.setColor(prevColor);
     }
 
+    /**
+     * This method is used to design the background content and border of HomeMenu window.
+     *
+     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     */
     private void drawContainer(Graphics2D g2d){
         background = new ImageIcon(getClass().getResource("/BrickBreaker2.jpg")).getImage();
         g2d.drawImage(background, 0,0,550,350,null);
@@ -128,13 +156,17 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
         g2d.draw(menuFace);
 
-        g2d.draw(menuFace);
+        //g2d.draw(menuFace);   //need to be removed
 
         g2d.setStroke(tmp);
 
         g2d.setColor(prev);
     }
 
+    /**
+     * This method is used to locate text in the HomeMenu window.
+     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     */
     private void drawText(Graphics2D g2d){
 
         g2d.setColor(TEXT_COLOR);
@@ -168,6 +200,11 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     }
 
+    /**
+     * This method is used to locate button in the HomeMenu window.
+     *
+     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     */
     private void drawButton(Graphics2D g2d){
 
         FontRenderContext frc = g2d.getFontRenderContext();    //measure text width
@@ -258,6 +295,14 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     }
 
+    /**
+     * This is a built-in method used to detect mouse clicked in HomeMenu window.
+     * If the user clicked on start button, the game starts.
+     * If the user clicked on Exit Button, the program stops and exits.
+     * If the user clicked on Guide Button, it pops up Guide Window.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -274,6 +319,12 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         }
     }
 
+    /**
+     * This is a built-in method used to detect mouse pressed in HomeMenu window.
+     * If user presses on any buttons, the button's width and height increase by one.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -292,6 +343,12 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         }
     }
 
+    /**
+     * This is a built-in method used to detect mouse released in HomeMenu window.
+     * If user presses on any buttons, the button's width and height increase by one.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         if(startClicked ){
@@ -308,22 +365,46 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         }
     }
 
+    /**
+     * This is a built-in method used to detect mouse entered in HomeMenu window.
+     * Do Nothing in the program.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseEntered(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * This is a built-in method used to detect mouse Exited in HomeMenu window.
+     * Do Nothing in the program.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseExited(MouseEvent mouseEvent) {
 
     }
 
 
+    /**
+     * This is a built-in method used to detect mouse dragged in HomeMenu window.
+     * Do Nothing in the program.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * This is a built-in method used to detect mouse moved in HomeMenu window.
+     * If the mouse touches the button, the default arrow cursor become the hand cursor.
+     *
+     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();

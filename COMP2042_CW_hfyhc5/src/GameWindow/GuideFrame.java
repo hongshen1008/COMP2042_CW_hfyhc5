@@ -5,6 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * GuideFrame class to open Guide window when pressed on Guide button.
+ *
+ * @author Chin Hong Shen
+ * @version 0.2
+ * @since 26 November 2021
+ */
 public class GuideFrame extends JFrame implements ActionListener {
 
     private static final int FRAME_WIDTH = 700;   //frame width
@@ -14,6 +21,10 @@ public class GuideFrame extends JFrame implements ActionListener {
     private GameFrame gameFrame;
     //private ImageIcon background = new ImageIcon(getClass().getResource("/guideImage1.jpg"));
 
+    /**
+     * GuideFrame constructor to design Guide Window.
+     * <p>Call methods to enable guide screen and back button.</p>
+     */
     public GuideFrame(){
         drawGuideMenu();
         enableButton();
@@ -28,6 +39,9 @@ public class GuideFrame extends JFrame implements ActionListener {
         this.add(backButton);
     }
 
+    /**
+     * This method is used to set text on Guide Window.
+     */
     private void drawGuideMenu() {
         guideTitle = new JLabel();
         //guideTitle.setIcon(background);
@@ -46,6 +60,9 @@ public class GuideFrame extends JFrame implements ActionListener {
         guideTitle.setFont(new Font(null, Font.PLAIN, 20));   //set font
     }
 
+    /**
+     * This method is used to design button and set button text on Guide Window.
+     */
     public void enableButton(){
         backButton = new JButton();
         backButton.setBounds(550,400,100, 30);
@@ -56,6 +73,11 @@ public class GuideFrame extends JFrame implements ActionListener {
         backButton.addActionListener(this);
     }
 
+    /**
+     * This is a built-in method, used to perform an action when button is clicked.
+     *
+     * @param e An object to represent the event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==backButton){
