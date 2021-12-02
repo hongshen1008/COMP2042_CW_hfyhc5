@@ -21,18 +21,21 @@ import GameObject.Ball;
 import GameObject.Player;
 import GameObject.RubberBall;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.io.*;
 import java.util.Random;
 
 
 public class Wall {
 
-    private static final int LEVELS_COUNT = 4;
+    private static final int LEVELS_COUNT = 5;
 
     private static final int CLAY = 1;
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
+    private static final int TITANIUM = 4;
 
     private Random rnd;
     private Rectangle area;
@@ -47,6 +50,8 @@ public class Wall {
     private Point startPoint;
     private int brickCount;
     private int ballCount;
+    private int score;
+    private String highScore = "";
     private boolean ballLost;
 
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
@@ -55,10 +60,9 @@ public class Wall {
 
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio); //brickCount = num of brick, line count = 3 rows of brick
         level = 0;
-
+        setScore(0);
         ballCount = 3;
         ballLost = false;
-
         rnd = new Random();
 
         makeBall(ballPos);  //set ball position
@@ -72,7 +76,12 @@ public class Wall {
 
         getBall().setSpeed(speedX,speedY);
 
-        this.player = new Player((Point) ballPos.clone(),150,10, drawArea);     //call player constructor
+        this.player = new Player((Point) ballPos.clone(),150,10, drawArea);     //instantiate player class
+
+        if(highScore.equals(""))
+        {
+            highScore = this.getHighScore();
+        }
 
         area = drawArea;
 
@@ -85,6 +94,7 @@ public class Wall {
         tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
         tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
         tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        tmp[4] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,TITANIUM,CEMENT);
         return tmp;
     }
 
@@ -133,39 +143,44 @@ public class Wall {
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller then brickCount
          */
-        brickCnt -= brickCnt % lineCnt;
+        brickCnt -= brickCnt % lineCnt; //set brickCnt to 30 because 31 - (31 % 3) = 1
 
-        int brickOnLine = brickCnt / lineCnt;
+        int brickOnLine = brickCnt / lineCnt;   //num of brick per line (changed to brickPerLine) ,30/3 = 10
 
-        int centerLeft = brickOnLine / 2 - 1;
-        int centerRight = brickOnLine / 2 + 1;
+        int centerLeft = brickOnLine / 2 - 1;   // (10/2) -1 = 4
+        int centerRight = brickOnLine / 2 + 1;  // (10/2) +1 = 6
 
-        double brickLen = drawArea.getWidth() / brickOnLine;
-        double brickHgt = brickLen / brickSizeRatio;
+        double brickLen = drawArea.getWidth() / brickOnLine;    //length of each brick
+        double brickHgt = brickLen / brickSizeRatio;    //height of the line
 
-        brickCnt += lineCnt / 2;
+        brickCnt += lineCnt / 2;    //set brick count back to 31
 
-        Brick[] tmp  = new Brick[brickCnt];
+        Brick[] tmp  = new Brick[brickCnt]; //array[31]
 
         Dimension brickSize = new Dimension((int) brickLen,(int) brickHgt);
         Point p = new Point();
 
         int i;
-        for(i = 0; i < tmp.length; i++){
-            int line = i / brickOnLine;
-            if(line == lineCnt)
-                break;
+        for(i = 0; i < tmp.length; i++){    //loop 31 times for all bricks
+            int line = i / brickOnLine;     //total will be 3 lines (line 0, 1, 2)
+            if(line == lineCnt)             //if 3 ==3
+                break;                      //break for loop
+            //set coordinate of brick
             int posX = i % brickOnLine;
             double x = posX * brickLen;
+            //line 0, 2 will set the coordinate for brick normally
+            //line 1 will start with half of the brick
             x =(line % 2 == 0) ? x : (x - (brickLen / 2));
             double y = (line) * brickHgt;
             p.setLocation(x,y);
-
+            //line 0 and line 2, pattern is the same
+            //line 1 posX > 4 && posX <= 6
+            //make type of brick(level) according to the condition
             boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
             tmp[i] = b ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typeB);
         }
 
-        for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
+        for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){   //this loop specifically for the last brick in 2nd line (line 1)
             double x = (brickOnLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
             tmp[i] = makeBrick(p,brickSize,typeA);
@@ -174,7 +189,7 @@ public class Wall {
     }
 
     private void makeBall(Point2D ballPos){
-        setBall(new RubberBall(ballPos));   // call rubber ball constructor to set ball position
+        setBall(new RubberBall(ballPos));   // instantiate rubber ball class to set ball position
     }
 
     public void move(){
@@ -191,6 +206,7 @@ public class Wall {
             * because for every brick program checks for horizontal and vertical impacts
             */
             brickCount--;
+            score++;
         }
         else if(impactBorder()) {   //if the ball touch the window left and right border bounce back
             getBall().reverseX();
@@ -266,10 +282,83 @@ public class Wall {
             case CEMENT:
                 out = new CementBrick(point, size);
                 break;
+            case TITANIUM:
+                out = new TitaniumBrick(point, size);
+                break;
             default:
                 throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
         }
         return  out;
+    }
+
+    public String getHighScore(){
+        FileReader readFile = null;
+        BufferedReader reader = null;
+        try {
+            readFile = new FileReader("highscore.dat");
+            reader = new BufferedReader(readFile);
+            return reader.readLine();
+        }
+        catch (Exception e) {
+            return "Mr Nobody:0";
+        }
+        finally {
+            try{
+                if(reader != null)
+                    reader.close();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void checkScore(){
+        if (highScore.equals(""))
+        {
+            return;
+        }
+        if(getScore() > Integer.parseInt((getHighScore().split(":")[1]))){
+            String name = JOptionPane.showInputDialog("You've create a new High score! What is your name?");
+            highScore = name + ":" + getScore();
+            System.out.println(highScore);
+            File scoreFile = new File("highscore.dat");
+            if(!scoreFile.exists())
+            {
+                try {
+                    scoreFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                /*FileWriter writerFile = null;
+                BufferedWriter writer = null;
+                try {
+                    writerFile = new FileWriter(scoreFile);
+                    writer = new BufferedWriter(writerFile);
+                    writer.write(this.highScore);
+                }
+
+                catch (Exception e) {
+
+                }
+                finally {
+                    try {
+                        if (writer != null)
+                            writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }*/
+            }
+            try {
+                FileWriter writer = new FileWriter(scoreFile);
+                writer.write(this.highScore);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     public boolean ballEnd(){
@@ -331,5 +420,18 @@ public class Wall {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score){
+        this.score = score;
+    }
+
+    public int scoreReset(){
+        score = 0;
+        return score;
     }
 }

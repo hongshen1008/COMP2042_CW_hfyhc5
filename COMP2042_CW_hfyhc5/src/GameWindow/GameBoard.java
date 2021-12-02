@@ -58,7 +58,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Wall wall;
 
     private String message;
-
+    private String scoreMessage;
+    private String highScore;
     private boolean showPauseMenu;
 
     private Font menuFont;
@@ -87,40 +88,15 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         this.initialize();
         message = "";
+        scoreMessage = "";
+        highScore = "";
         wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));   //call wall constructor
 
         debugConsole = new DebugConsole(owner,wall,this);   //call debugConsole constructor
         //initialize the first level
         wall.nextLevel();
 
-        gameTimer = new Timer(10,e ->{  //maybe can move out to a method.
-            wall.move();
-            wall.findImpacts();
-            message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),wall.getBallCount());
-            if(wall.isBallLost()){
-                if(wall.ballEnd()){
-                    wall.wallReset();
-                    message = "Game over";
-                }
-                wall.ballReset();
-                gameTimer.stop();
-            }
-            else if(wall.isDone()){
-                if(wall.hasLevel()){
-                    message = "Go to Next Level";
-                    gameTimer.stop();
-                    wall.ballReset();
-                    wall.wallReset();
-                    wall.nextLevel();
-                }
-                else{
-                    message = "CONGRATULATIONS! ALL WALLS DESTROYED";   //add congratulations
-                    gameTimer.stop();
-                }
-            }
-
-            repaint();
-        });
+        promptMessage();
 
     }
 
@@ -137,6 +113,42 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.addMouseMotionListener(this);
     }
 
+    public void promptMessage(){    //moved out from constructor.
+        gameTimer = new Timer(10,e ->{
+            wall.move();
+            wall.findImpacts();
+            message = String.format("Bricks: %d Balls %d ",wall.getBrickCount(),wall.getBallCount());
+            scoreMessage = String.format("Score: %d", wall.getScore());
+            highScore = String.format("High Score: " + wall.getHighScore());
+            if(wall.isBallLost()){
+                if(wall.ballEnd()){
+                    wall.checkScore();
+                    wall.wallReset();
+                    wall.scoreReset();
+                    message = "Game over";
+                }
+                wall.ballReset();
+                gameTimer.stop();
+            }
+            else if(wall.isDone()){
+                if(wall.hasLevel()){
+                    message = "Go to Next Level";
+                    gameTimer.stop();
+                    wall.ballReset();
+                    wall.wallReset();
+                    wall.nextLevel();
+                }
+                else{
+                    message = "CONGRATULATIONS! ALL WALLS DESTROYED";   //add congratulations
+                    wall.checkScore();
+                    gameTimer.stop();
+                }
+            }
+
+            repaint();
+        });
+    }
+
 
     /**
      * This method is used to deign the game objects and Pause menu.
@@ -151,6 +163,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(Color.BLUE);
         g2d.drawString(message,250,225);
+        g2d.drawString(scoreMessage,270,240);
+        g2d.drawString(highScore, 245, 255);
 
         drawBall(wall.getBall(),g2d);
 
