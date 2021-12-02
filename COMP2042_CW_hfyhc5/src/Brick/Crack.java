@@ -6,9 +6,6 @@ import java.awt.geom.Point2D;
 
 public class Crack{
 
-        //private static final int CRACK_SECTIONS = 3;
-        //private static final double JUMP_PROBABILITY = 0.7;
-
         public static final int LEFT = 10;
         public static final int RIGHT = 20;
         public static final int UP = 30;
@@ -82,7 +79,6 @@ public class Crack{
             double h = (end.y - start.y) / (double)steps;
 
             int bound = crackDepth; //bound =1
-            //int jump  = bound * 5;
 
             double x,y;
 
@@ -90,9 +86,6 @@ public class Crack{
 
                 x = (i * w) + start.x;
                 y = (i * h) + start.y + randomInBounds(bound);  //bound = 1
-
-                /*if(inMiddle(i,CRACK_SECTIONS,steps))
-                    y += jumps(jump,JUMP_PROBABILITY);  //jump = 5*/
 
                 path.lineTo(x,y);
 
@@ -106,21 +99,6 @@ public class Crack{
             int n = (bound * 2) + 1;
             return Brick.getRnd().nextInt(n) - bound;
         }
-
-        /*private boolean inMiddle(int i,int steps,int divisions){    //steps = 3, divisions = 35
-            int low = (steps / divisions);
-            int up = low * (divisions - 1);
-
-            return  (i > low) && (i < up);
-        }
-
-        private int jumps(int bound,double probability){     //bound = 5, probability = 0.7
-
-            if(rnd.nextDouble() > probability)
-                return randomInBounds(bound);   //bound = 5
-            return  0;
-
-        }*/
 
         private Point makeRandomPoint(Point from,Point to, int direction){
 

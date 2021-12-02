@@ -156,8 +156,6 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
         g2d.draw(menuFace);
 
-        //g2d.draw(menuFace);   //need to be removed
-
         g2d.setStroke(tmp);
 
         g2d.setColor(prev);
