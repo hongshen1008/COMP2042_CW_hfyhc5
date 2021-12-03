@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class TitaniumBrick extends Brick{
 
-    private static final String NAME = "Titanium Brick";
     private static final Color DEF_INNER = Color.decode("#a1a09a");
     private static final Color DEF_BORDER = Color.BLACK;
     private static final int TITANIUM_STRENGTH = 1;
@@ -16,7 +15,7 @@ public class TitaniumBrick extends Brick{
     private Shape brickFace;
 
     public TitaniumBrick(Point point, Dimension size){
-        super(NAME,point,size,DEF_BORDER,DEF_INNER,TITANIUM_STRENGTH);
+        super(point,size,DEF_BORDER,DEF_INNER,TITANIUM_STRENGTH);
         this.rnd = new Random();    //put this
         this.brickFace = super.brickFace;   //put this
     }

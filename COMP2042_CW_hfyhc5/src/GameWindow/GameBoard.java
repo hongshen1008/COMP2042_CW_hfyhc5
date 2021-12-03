@@ -44,11 +44,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private static final String GUIDE = "Guide";    //add guide
     private static final int TEXT_SIZE = 30;
     private static final Color MENU_COLOR = new Color(0,255,0);
-
-
     private static final int DEF_WIDTH = 600;   //frame width
     private static final int DEF_HEIGHT = 450;  //frame height
-
     private static final Color BG_COLOR = Color.WHITE;  //background color
 
     private GuideFrame guideFrame;
@@ -63,6 +60,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private boolean showPauseMenu;
 
     private Font menuFont;
+    private Font messageFont;
 
     private Rectangle continueButtonRect;
     private Rectangle exitButtonRect;
@@ -85,6 +83,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         showPauseMenu = false;
 
         menuFont = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
+        messageFont = new Font("MONOSPACED",Font.BOLD,13); //added message font
 
         this.initialize();
         message = "";
@@ -113,6 +112,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.addMouseMotionListener(this);
     }
 
+    /**
+     *This method is used to detect the actions during the game play.
+     * Display messages on actions.
+     */
     public void promptMessage(){    //moved out from constructor.
         gameTimer = new Timer(10,e ->{
             wall.move();
@@ -160,11 +163,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         Graphics2D g2d = (Graphics2D) g;
 
         clear(g2d);
-
+        g2d.setFont(messageFont);
         g2d.setColor(Color.BLUE);
-        g2d.drawString(message,250,225);
-        g2d.drawString(scoreMessage,270,240);
-        g2d.drawString(highScore, 245, 255);
+        g2d.drawString(message,5,100);
+        g2d.drawString(scoreMessage,5,115);
+        g2d.drawString(highScore, 5, 130);
 
         drawBall(wall.getBall(),g2d);
 
@@ -203,10 +206,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(brick.getInnerColor());
         g2d.fill(brick.getBrickFace());
-
         g2d.setColor(brick.getBorderColor());
         g2d.draw(brick.getBrickFace());
-
 
         g2d.setColor(tmp);
     }

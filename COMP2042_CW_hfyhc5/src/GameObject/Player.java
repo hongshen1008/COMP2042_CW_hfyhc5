@@ -62,6 +62,11 @@ public class Player {
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);  //set location of bar
     }
 
+    public void moveTo(Point p){    //player go to center, reordered code structure
+        ballPoint.setLocation(p);
+        playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
+    }
+
     public void moveLeft(){
         moveAmount = -DEF_MOVE_AMOUNT;
     }
@@ -76,10 +81,5 @@ public class Player {
 
     public Shape getPlayerFace(){
         return playerFace;
-    }
-
-    public void moveTo(Point p){    //player go to center
-        ballPoint.setLocation(p);
-        playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
 }

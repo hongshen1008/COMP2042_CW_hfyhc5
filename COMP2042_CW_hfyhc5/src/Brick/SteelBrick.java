@@ -24,7 +24,6 @@ import java.util.Random;
 
 public class SteelBrick extends Brick {
 
-    private static final String NAME = "Steel Brick";
     private static final Color DEF_INNER = new Color(203, 203, 201);
     private static final Color DEF_BORDER = Color.BLACK;
     private static final int STEEL_STRENGTH = 1;
@@ -34,7 +33,7 @@ public class SteelBrick extends Brick {
     private Shape brickFace;
 
     public SteelBrick(Point point, Dimension size){
-        super(NAME,point,size,DEF_BORDER,DEF_INNER,STEEL_STRENGTH);
+        super(point,size,DEF_BORDER,DEF_INNER,STEEL_STRENGTH);
         this.rnd = new Random();    //put this
         this.brickFace = super.brickFace;   //put this
     }

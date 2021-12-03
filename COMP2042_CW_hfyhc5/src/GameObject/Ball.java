@@ -14,10 +14,10 @@ abstract public class Ball {
 
     private Point2D center;
 
-    private Point2D up;     //put access modifier and getter/setter method, so that it is accessible by other classes
-    private Point2D down;   //put access modifier and getter/setter method
-    private Point2D left;   //put access modifier and getter/setter method
-    private Point2D right;  //put access modifier and getter/setter method
+    private Point2D up;     //put access modifier and get method
+    private Point2D down;   //put access modifier and get method
+    private Point2D left;   //put access modifier and get method
+    private Point2D right;  //put access modifier and get method
 
     private Color border;
     private Color inner;
@@ -37,15 +37,10 @@ abstract public class Ball {
     public Ball(Point2D center,int radiusA,int radiusB,Color inner,Color border){   //constructor
         this.center = center;
 
-        this.up = new Point2D.Double();
-        this.down = new Point2D.Double();
-        this.left = new Point2D.Double();
-        this.right = new Point2D.Double();
-
-        getUp().setLocation(center.getX(),center.getY()-(radiusB / 2));  //upper part of the ball
-        getDown().setLocation(center.getX(),center.getY()+(radiusB / 2)); //lower part of the ball
-        getLeft().setLocation(center.getX()-(radiusA /2),center.getY()); //left part of the ball
-        getRight().setLocation(center.getX()+(radiusA /2),center.getY()); //right part of the ball
+        this.up = new Point2D.Double(center.getX(),center.getY()-(radiusB / 2));    //upper part of the ball
+        this.down = new Point2D.Double(center.getX(),center.getY()+(radiusB / 2));  //lower part of the ball
+        this.left = new Point2D.Double(center.getX()-(radiusA /2),center.getY());   //left part of the ball
+        this.right = new Point2D.Double(center.getX()+(radiusA /2),center.getY());  //right part of the ball
 
 
         ballFace = makeBall(center,radiusA,radiusB);
@@ -66,33 +61,34 @@ abstract public class Ball {
     protected abstract Shape makeBall(Point2D center,int radiusA,int radiusB);
 
     /**
-     * This method is used to set the speed of the ball during its movement.
+     * This method is used to set the ball movement.
      */
     public void move(){
-        RectangularShape tmp = (RectangularShape) ballFace;
         center.setLocation((center.getX() + speedX),(center.getY() + speedY));
-        double w = tmp.getWidth();
-        double h = tmp.getHeight();
+        getFrameCenter();
 
-        tmp.setFrame((center.getX() -(w / 2)),(center.getY() - (h / 2)),w,h);
-        setPoints(w,h);
-
-        ballFace = tmp;
     }
 
     /**
-     * This method is used to set the location of the ball in the center in the beginning of the game.
+     * This method is used to set the ball location in the beginning of the game.
      *
      * @param p represents location in (x,y) coordinate space
      */
     public void moveTo(Point p){
         center.setLocation(p);
+        getFrameCenter();
 
+    }
+
+    /**
+     * This method is to set ball in the center location of the frame.
+     */
+    private void getFrameCenter(){
         RectangularShape tmp = (RectangularShape) ballFace;
         double w = tmp.getWidth();
         double h = tmp.getHeight();
-
         tmp.setFrame((center.getX() -(w / 2)),(center.getY() - (h / 2)),w,h);
+        setPoints(w,h);
         ballFace = tmp;
     }
 
@@ -103,10 +99,10 @@ abstract public class Ball {
      * @param height represents to height of the game window
      */
     private void setPoints(double width,double height){
-        getUp().setLocation(center.getX(),center.getY()-(height / 2));
-        getDown().setLocation(center.getX(),center.getY()+(height / 2));
-        getLeft().setLocation(center.getX()-(width / 2),center.getY());
-        getRight().setLocation(center.getX()+(width / 2),center.getY());
+        up.setLocation(center.getX(),center.getY()-(height / 2));
+        down.setLocation(center.getX(),center.getY()+(height / 2));
+        left.setLocation(center.getX()-(width / 2),center.getY());
+        right.setLocation(center.getX()+(width / 2),center.getY());
     }
 
     /**
