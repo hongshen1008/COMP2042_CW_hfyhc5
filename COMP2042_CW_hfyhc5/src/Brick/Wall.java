@@ -127,7 +127,7 @@ public class Wall {
 
     public void initialiseSpeed(Point2D ballPos){
         ball = new RubberBall(ballPos);
-        int speedX = 3, speedY = -3;
+        int speedX = 4, speedY = -4;
         ball.setSpeed(speedX,speedY);
 
     }
@@ -136,7 +136,7 @@ public class Wall {
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
 
-        int speedX = 2, speedY = -3;
+        int speedX = 4, speedY = -4;
         ball.setSpeed(speedX,speedY);
         ballLost = false;
     }
@@ -260,5 +260,8 @@ public class Wall {
     public int scoreReset(){
         score = 0;
         return score;
+    }
+    public void setScore(int score) {
+        this.score = score;
     }
 }

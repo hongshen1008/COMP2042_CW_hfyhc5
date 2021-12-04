@@ -6,10 +6,10 @@ import java.util.Random;
 
 public class TitaniumBrick extends Brick{
 
-    private static final Color DEF_INNER = Color.decode("#a1a09a");
+    private static final Color DEF_INNER = Color.decode("#585855");
     private static final Color DEF_BORDER = Color.BLACK;
     private static final int TITANIUM_STRENGTH = 1;
-    private static final double TITANIUM_PROBABILITY = 0.4;
+    private static final double TITANIUM_PROBABILITY = 0.35;
 
     private Random rnd;
     private Shape brickFace;

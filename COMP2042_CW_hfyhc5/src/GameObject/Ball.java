@@ -66,7 +66,6 @@ abstract public class Ball {
     public void move(){
         center.setLocation((center.getX() + speedX),(center.getY() + speedY));
         getFrameCenter();
-
     }
 
     /**

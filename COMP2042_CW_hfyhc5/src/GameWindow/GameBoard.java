@@ -124,6 +124,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             scoreMessage = String.format("Score: %d", wall.getScore());
             highScore = String.format("High Score: " + wall.getHighScore());
             if(wall.isBallLost()){
+                if(wall.getScore()>=3) {
+                    wall.setScore(wall.getScore()-3);
+                }
+                else{
+                    wall.setScore(0);
+                }
                 if(wall.ballEnd()){
                     wall.checkScore();
                     wall.wallReset();
@@ -134,6 +140,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 gameTimer.stop();
             }
             else if(wall.isDone()){
+                if(wall.getBallCount()==3)
+                {
+                    wall.setScore(wall.getScore()+5);
+                }
                 if(wall.hasLevel()){
                     message = "Go to Next Level";
                     gameTimer.stop();
@@ -145,6 +155,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                     message = "CONGRATULATIONS! ALL WALLS DESTROYED";   //add congratulations
                     wall.checkScore();
                     gameTimer.stop();
+                    repaint();
                 }
             }
 
