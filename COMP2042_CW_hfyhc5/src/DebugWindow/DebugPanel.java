@@ -25,7 +25,14 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 
-
+/**
+ * This is DebugPanel class. Inherits JPanel properties.
+ * Perform game controls such as adjust ball speed, skip levels and reset ball lives.
+ *
+ * @author Chin Hong Shen
+ * @version 0.2
+ * @since 24 November 2021
+ */
 public class DebugPanel extends JPanel {      //windows to control level and speed
 
     private static final Color DEF_BKG = Color.WHITE;
@@ -38,6 +45,11 @@ public class DebugPanel extends JPanel {      //windows to control level and spe
 
     private Wall wall;
 
+    /**
+     * This is DebugPanel class constructor. Construct an DebugPanel object.
+     *
+     * @param wall represents wall class
+     */
     public DebugPanel(Wall wall){
 
         this.wall = wall;
@@ -58,17 +70,35 @@ public class DebugPanel extends JPanel {      //windows to control level and spe
 
     }
 
+    /**
+     * This method is used to implement the characteristics of the DebugPanel.
+     */
     private void initialize(){
         this.setBackground(DEF_BKG);
         this.setLayout(new GridLayout(2,2));
     }
 
+    /**
+     * This method is used to create a button.
+     *
+     * @param title represents the title of the button
+     * @param e     receives action event
+     * @return      return a button with text and ready to perform an event
+     */
     private JButton makeButton(String title, ActionListener e){
         JButton out = new JButton(title);
         out.addActionListener(e);
         return  out;
     }
 
+    /**
+     * This method is used to create a slider.
+     *
+     * @param min represents the minimum value on the slider
+     * @param max represents the maximum value on the slider
+     * @param e   defines an object which listens for ChangeEvents.
+     * @return    return a slider with minimum, maximum value and ready to perform ChangeEvents.
+     */
     private JSlider makeSlider(int min, int max, ChangeListener e){
         JSlider out = new JSlider(min,max);
         out.setMajorTickSpacing(1);
@@ -78,6 +108,12 @@ public class DebugPanel extends JPanel {      //windows to control level and spe
         return out;
     }
 
+    /**
+     * This method is used to set value for ball speed.
+     *
+     * @param x represents speed in x-coordinate
+     * @param y represents speed in y-coordinate
+     */
     public void setValues(int x,int y){
         ballXSpeed.setValue(x);
         ballYSpeed.setValue(y);

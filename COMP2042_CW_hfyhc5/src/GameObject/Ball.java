@@ -7,6 +7,9 @@ import java.awt.geom.RectangularShape;
 /**
  * This is abstract Ball class, used to determine locations of ball during ball movements.
  *
+ * @author Chin Hong Shen
+ * @version 0.2
+ * @since 24 November 2021
  */
 abstract public class Ball {
 
@@ -28,10 +31,10 @@ abstract public class Ball {
     /**
      * This is Ball class constructor, used to initialise variables and perform instantiation.
      *
-     * @param center represents center of the game window
+     * @param center represents center position of the game window
      * @param radiusA represents radius of the ball
      * @param radiusB represents radius of the ball
-     * @param inner represents the inner color of the ball which is yellow
+     * @param inner   represents the inner color of the ball which is yellow
      * @param border represents the border color of the ball which is dark yellow
      */
     public Ball(Point2D center,int radiusA,int radiusB,Color inner,Color border){   //constructor
@@ -53,7 +56,7 @@ abstract public class Ball {
     /**
      * This is an abstract method, used to hide details of implementations.
      *
-     * @param center represents the center position of the screen
+     * @param center represents the center position of the game window
      * @param radiusA represents the radius of the ball
      * @param radiusB represents the radius of the ball
      * @return the shape of the ball

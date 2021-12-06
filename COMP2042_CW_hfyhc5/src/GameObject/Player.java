@@ -20,6 +20,13 @@ package GameObject;
 import java.awt.*;
 
 
+/**
+ * This is Player class. Create player bar and implement operations of player bar.
+ *
+ * @author Chin Hong Shen
+ * @version 0.2
+ * @since 24 November 2021
+ */
 public class Player {
 
 
@@ -35,6 +42,14 @@ public class Player {
     private int max;
 
 
+    /**
+     * This is Player class constructor. Initialize variables.
+     *
+     * @param ballPoint represents the location of the ball
+     * @param width     represents the width of player bar
+     * @param height    represents the height of player bar
+     * @param container represents the area of the frame
+     */
     public Player(Point ballPoint,int width,int height,Rectangle container) {   //player constructor
         this.ballPoint = ballPoint;
         stop();                           //change movement to stop method
@@ -44,16 +59,32 @@ public class Player {
 
     }
 
+    /**
+     * This method is used to create rectangular player bar.
+     *
+     * @param width represents the width of player bar
+     * @param height represents the heigth of player bar.
+     * @return  return (x,y) coordinate space, width and height to form rectangle shape
+     */
     private Rectangle makeRectangle(int width,int height){  //construct rectangle for player bar
         Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
         return  new Rectangle(p,new Dimension(width,height));   //point, dimension
     }
 
+    /**
+     * This method is used to determine whether the ball has contact with the player bar.
+     *
+     * @param b represents ball class.
+     * @return  return true if the ball has contact with player bar
+     */
     public boolean impact(Ball b){
         //true if the ball is within the player bar && contact with the bar
         return playerFace.contains(b.getPosition()) && playerFace.contains(b.getDown()) ;
     }
 
+    /**
+     * This method is used to determine the movement of player bar.
+     */
     public void move(){
         double x = ballPoint.getX() + moveAmount;
         if(x < min || x > max)
@@ -62,23 +93,45 @@ public class Player {
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);  //set location of bar
     }
 
+    /**
+     * This method is used to set the player bar to center position in the beginning of the game.
+     *
+     * @param p represents the start point of the player bar.
+     */
     public void moveTo(Point p){    //player go to center, reordered code structure
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
 
+    /**
+     * This method is used to set the move amount of the player bar.
+     * Move player bar to the left.
+     */
     public void moveLeft(){
         moveAmount = -DEF_MOVE_AMOUNT;
     }
 
+    /**
+     * This method is used to set the move amount of the player bar.
+     * Move player bar to the right.
+     */
     public void movRight(){
         moveAmount = DEF_MOVE_AMOUNT;
     }
 
+    /**
+     * This method represents the move amount when the player bar stopped.
+     * The move amount is 0 when there is no movement.
+     */
     public void stop(){
         moveAmount = 0;
     }
 
+    /**
+     * This method is used to get playerFace variable which is the player bar.
+     *
+     * @return outline of the player bar's shape
+     */
     public Shape getPlayerFace(){
         return playerFace;
     }

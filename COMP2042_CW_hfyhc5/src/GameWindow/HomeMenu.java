@@ -375,7 +375,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     }
 
     /**
-     * This is a built-in method used to detect mouse Exited in HomeMenu window.
+     * This is a built-in method used to detect mouse exited in HomeMenu window.
      * Do Nothing in the program.
      *
      * @param mouseEvent represents MouseEvent class to detect mouse action.

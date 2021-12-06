@@ -2,6 +2,13 @@ package Brick;
 
 import java.awt.*;
 
+/**
+ * This is Levels class. Implements level operations, to determine the pattern of the brick in different levels.
+ *
+ * @author Chin Hong Shen
+ * @version 0.2
+ * @since 24 November 2021
+ */
 public class Levels {
 
     private static final int LEVELS_COUNT = 5;
@@ -10,6 +17,16 @@ public class Levels {
     private static final int CEMENT = 3;
     private static final int TITANIUM = 4;
 
+    /**
+     * This method is used to call methods for different levels.
+     * There are five levels in the game.
+     *
+     * @param drawArea represents the area of the rectangle
+     * @param brickCount represents number of bricks
+     * @param lineCount  represents the layers to form a wall
+     * @param brickDimensionRatio represents the ratio of the height and width of a brick
+     * @return Brick class
+     */
     Brick[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
 
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
@@ -21,6 +38,16 @@ public class Levels {
         return tmp;
     }
 
+    /**
+     * This method is used to determine the first level's wall pattern.
+     *
+     * @param drawArea represents the area of the rectangle
+     * @param brickCnt represents number of bricks
+     * @param lineCnt  represents the layers to form a wall
+     * @param brickSizeRatio represents the ratio of the height and width of a brick
+     * @param type represents type of bricks
+     * @return brick class
+     */
     private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
@@ -61,6 +88,17 @@ public class Levels {
 
     }
 
+    /**
+     * This method is used to determine the second to fourth level's wall pattern.
+     *
+     * @param drawArea represents the area of the rectangle
+     * @param brickCnt represents number of bricks
+     * @param lineCnt  represents the layers to form a wall
+     * @param brickSizeRatio represents the ratio of the height and width of a brick
+     * @param typeA represents type of bricks
+     * @param typeB represents type of bricks
+     * @return brick class
+     */
     private Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
@@ -111,6 +149,18 @@ public class Levels {
         return tmp;
     }
 
+    /**
+     * This method is used to determine the last level's wall pattern.
+     *
+     * @param drawArea represents the area of the rectangle
+     * @param brickCnt represents number of bricks
+     * @param lineCnt  represents the layers to form a wall
+     * @param brickSizeRatio represents the ratio of the height and width of a brick
+     * @param typeA represents type of bricks
+     * @param typeB represents type of bricks
+     * @param typeC represents type of bricks
+     * @return brick class
+     */
     private Brick[] makeLastLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB, int typeC){
         brickCnt -= brickCnt % lineCnt; //set brickCnt to 30 because 31 - (31 % 3) = 1
 
@@ -162,7 +212,6 @@ public class Levels {
             {
                 tmp[i] = makeBrick(p,brickSize,typeB);
             }
-            //tmp[i] = (b && ((line ==0) || (line ==1))) ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typeB);
 
         }
 
@@ -174,6 +223,15 @@ public class Levels {
         return tmp;
     }
 
+    /**
+     * This method is used to make types of bricks.
+     * Instantiate different brick types class.
+     *
+     * @param point represents location of the bricks
+     * @param size represents dimension of the bricks
+     * @param type represents the types of bricks
+     * @return type of brick to Brick class
+     */
     private Brick makeBrick(Point point, Dimension size, int type){
         Brick out;
         switch(type){
@@ -190,7 +248,7 @@ public class Levels {
                 out = new TitaniumBrick(point, size);
                 break;
             default:
-                throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
+                throw new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
         }
         return out;
     }

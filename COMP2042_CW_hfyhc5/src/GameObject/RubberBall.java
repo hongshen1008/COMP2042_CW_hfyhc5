@@ -21,19 +21,34 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
+/**
+ * This is RubberBall class. Extends Ball class to do implementation.
+ */
 public class RubberBall extends Ball {
-
 
     private static final int DEF_RADIUS = 10;
     private static final Color DEF_INNER_COLOR = new Color(255, 219, 88);
     private static final Color DEF_BORDER_COLOR = DEF_INNER_COLOR.darker().darker();
 
 
+    /**
+     * This is RubberBall constructor. Inherits the properties of the super class.
+     *
+     * @param center represents the center location of the game window
+     */
     public RubberBall(Point2D center){
         super(center,DEF_RADIUS,DEF_RADIUS,DEF_INNER_COLOR,DEF_BORDER_COLOR);
     }
 
 
+    /**
+     * This method overrides the super class method, used to create the shape of the ball.
+     *
+     * @param center  represents the center position of the game window
+     * @param radiusA represents the radius of the ball
+     * @param radiusB represents the radius of the ball
+     * @return  return the shape of the ball
+     */
     @Override
     protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
 

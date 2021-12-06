@@ -113,7 +113,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
     /**
-     *This method is used to detect the actions during the game play.
+     * This method is used to detect the actions during the game play.
      * Display messages on actions.
      */
     public void promptMessage(){    //moved out from constructor.

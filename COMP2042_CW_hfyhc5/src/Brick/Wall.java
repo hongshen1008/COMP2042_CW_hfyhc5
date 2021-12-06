@@ -26,6 +26,13 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.io.*;
 
+/**
+ * This is Wall class. Implements game logics and operations.
+ *
+ *  @author Chin Hong Shen
+ *  @version 0.2
+ *  @since 24 November 2021
+ */
 public class Wall {
 
     private Rectangle area;
@@ -43,6 +50,16 @@ public class Wall {
     private String highScore = "";
     private boolean ballLost;
 
+    /**
+     * This is Wall class constructor. Construct wall object.
+     * Initialises variables and performs instantiation.
+     *
+     * @param drawArea represents area of the rectangle
+     * @param brickCount represents number of bricks
+     * @param lineCount  represents the layers to form a wall
+     * @param brickDimensionRatio represents the ratio of the height and width of a brick
+     * @param ballPos represents the ball location
+     */
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
 
         this.startPoint = new Point(ballPos);
@@ -69,11 +86,17 @@ public class Wall {
         this.ball = new RubberBall(ballPos);   // instantiate rubber ball class to set ball position
     }*/
 
+    /**
+     * This method is used to determine the movement of player and ball.
+     */
     public void move(){
         player.move();
         ball.move();
     }
 
+    /**
+     * This method is used to determine what operations should be done if the ball contacts with player bar or the border of the game window.
+     */
     public void findImpacts(){
         if(player.impact(ball)){  //if the ball contacts with player bar
             ball.reverseY();
@@ -97,6 +120,12 @@ public class Wall {
         }
     }
 
+    /**
+     * This method is used to determine if the ball contact with which direction of the brick.
+     * Different directions (UP, DOWN, LEFT, RIGHT) of the brick will lead to the different crack directions.
+     *
+     * @return true if the ball contact with the brick.
+     */
     private boolean impactWall(){
         for(Brick b : bricks){
             switch(b.findImpact(ball)) {   //get ball position
@@ -120,11 +149,22 @@ public class Wall {
         return false;
     }
 
+    /**
+     * This method is used to determine if the ball contact with the border of the game window.
+     *
+     * @return true is the ball has contact with the border of game window
+     */
     private boolean impactBorder(){
         Point2D p = ball.getPosition();
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
     }
 
+    /**
+     * This method is used to initialise the ball speed in the beginning of the game.
+     * Instantiate RubberBall class.
+     *
+     * @param ballPos represents the ball position.
+     */
     public void initialiseSpeed(Point2D ballPos){
         ball = new RubberBall(ballPos);
         int speedX = 4, speedY = -4;
@@ -132,6 +172,10 @@ public class Wall {
 
     }
 
+    /**
+     * This method is used to determine the ball and player ball location in the beginning of the game.
+     * The ball speed is reset if the ball is lost.
+     */
     public void ballReset(){
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
@@ -141,6 +185,9 @@ public class Wall {
         ballLost = false;
     }
 
+    /**
+     * This method is used to reset the wall in the original state after game over, next level and restarting the game.
+     */
     public void wallReset(){
         for(Brick b : bricks)
             b.repair();
@@ -149,6 +196,11 @@ public class Wall {
     }
 
 
+    /**
+     * This method is used to get and display high score during the game.
+     *
+     * @return a string that display the player's name and high score
+     */
     public String getHighScore(){
         FileReader readFile = null;
         BufferedReader reader = null;
@@ -171,6 +223,11 @@ public class Wall {
         }
     }
 
+    /**
+     * This method is used to check high score.
+     * Compares old and current high score.
+     * If player create new high score, pop up a panel to let player enters their name.
+     */
     public void checkScore(){
         if (highScore.equals(""))
         {
@@ -200,67 +257,145 @@ public class Wall {
         }
     }
 
+    /**
+     * This method is used to determine if the number of ball lives depleted.
+     *
+     * @return true if the ball count equals to zero
+     */
     public boolean ballEnd(){
         return ballCount == 0;
     }
 
+    /**
+     * This method is used to determine if the level is finished.
+     *
+     * @return true if there is no brick left in a level
+     */
     public boolean isDone(){
         return brickCount == 0;
     }
 
+    /**
+     * This method is used to set next level.
+     */
     public void nextLevel(){
         this.bricks = brick_level[tmp_level++];
         this.brickCount = bricks.length;
     }
 
+    /**
+     * This method is used to determine if there is another level.
+     *
+     * @return true if there is a next level
+     */
     public boolean hasLevel(){
         return tmp_level < brick_level.length;
     }
 
+    /**
+     * This method is used to determine the ball speed in horizontal direction.
+     *
+     * @param s represents the horizontal speed value
+     */
     public void setBallXSpeed(int s){
         ball.setXSpeed(s);
     }
 
+    /**
+     * This method is used to determine the ball speed in vertical direction.
+     *
+     * @param s represents the vertical speed value
+     */
     public void setBallYSpeed(int s){
         ball.setYSpeed(s);
     }
 
+    /**
+     * This method is used to reset ball count if player press on Reset Balls button in debug panel.
+     */
     public void resetBallCount(){
         ballCount = 3;
     }
 
+    /**
+     * This method is used to get brick count.
+     *
+     * @return number of brick count
+     */
     public int getBrickCount(){
         return brickCount;
     }
 
+    /**
+     * This method is used to get ball count.
+     *
+     * @return number of ball count
+     */
     public int getBallCount(){
         return ballCount;
     }
 
+    /**
+     * This method is used to determine if the ball is lost.
+     *
+     * @return true if the ball is lost
+     */
     public boolean isBallLost(){
         return ballLost;
     }
 
+    /**
+     * This method is used to get bricks.
+     *
+     * @return bricks to Brick class
+     */
     public Brick[] getBricks() {
         return bricks;
     }
 
+    /**
+     * This method is used to get ball.
+     *
+     * @return ball to Ball class
+     */
     public Ball getBall() {
         return ball;
     }
 
+    /**
+     * This method is used to get player bar.
+     *
+     * @return player to player class
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * This method is used to get score.
+     * If users break a brick, they will be rewarded for one score.
+     *
+     * @return score value
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * This method is used to reset score to zero after game over.
+     *
+     * @return zero score
+     */
     public int scoreReset(){
         score = 0;
         return score;
     }
+
+    /**
+     * This method is used to set the score.
+     *
+     * @param score represents the score value
+     */
     public void setScore(int score) {
         this.score = score;
     }

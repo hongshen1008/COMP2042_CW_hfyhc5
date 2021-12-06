@@ -96,7 +96,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
 
     /**
-     * This is built-in method to determine if the Game window is opened.
+     * This is built-in method to determine if the Game window is opened on screen.
      * The window is opened represents focus gained.
      *
      * @param windowEvent indicates that a window has changed its status
@@ -115,7 +115,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     }
 
     /**
-     * This is a built-in method to determine if the Game window is hidden.
+     * This is a built-in method to determine if the Game window is hidden from screen.
      * The window is hidden represents focus lost.
      *
      * @param windowEvent indicates that a window has changed its status
