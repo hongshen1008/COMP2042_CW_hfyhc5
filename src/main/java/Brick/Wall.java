@@ -140,10 +140,10 @@ public class Wall {
                 //Horizontal Impact
                 case Brick.LEFT_IMPACT:
                     ball.reverseX();
-                    return b.setImpact(ball.getRight(),Crack.RIGHT);
+                    return b.setImpact(ball.getRight(),Crack.LEFT);
                 case Brick.RIGHT_IMPACT:
                     ball.reverseX();
-                    return b.setImpact(ball.getLeft(),Crack.LEFT);
+                    return b.setImpact(ball.getLeft(),Crack.RIGHT);
             }
         }
         return false;

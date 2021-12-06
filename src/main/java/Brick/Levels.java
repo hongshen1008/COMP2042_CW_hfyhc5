@@ -55,9 +55,9 @@ public class Levels {
          */
         brickCnt -= brickCnt % lineCnt;
 
-        int brickOnLine = brickCnt / lineCnt;
+        int brickPerLine = brickCnt / lineCnt;
 
-        double brickLen = drawArea.getWidth() / brickOnLine;
+        double brickLen = drawArea.getWidth() / brickPerLine;
         double brickHgt = brickLen / brickSizeRatio;
 
         brickCnt += lineCnt / 2;
@@ -69,10 +69,10 @@ public class Levels {
 
         int i;
         for(i = 0; i < tmp.length; i++){
-            int line = i / brickOnLine;
+            int line = i / brickPerLine;
             if(line == lineCnt)
                 break;
-            double x = (i % brickOnLine) * brickLen;
+            double x = (i % brickPerLine) * brickLen;
             x =(line % 2 == 0) ? x : (x - (brickLen / 2));
             double y = (line) * brickHgt;
             p.setLocation(x,y);
@@ -80,7 +80,7 @@ public class Levels {
         }
 
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
-            double x = (brickOnLine * brickLen) - (brickLen / 2);
+            double x = (brickPerLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
             tmp[i] = new ClayBrick(p,brickSize);
         }
@@ -106,12 +106,12 @@ public class Levels {
          */
         brickCnt -= brickCnt % lineCnt; //set brickCnt to 30 because 31 - (31 % 3) = 1
 
-        int brickOnLine = brickCnt / lineCnt;   //num of brick per line (changed to brickPerLine) ,30/3 = 10
+        int brickPerLine = brickCnt / lineCnt;   //num of brick per line (changed to brickPerLine) ,30/3 = 10
 
-        int centerLeft = brickOnLine / 2 - 1;   // (10/2) -1 = 4
-        int centerRight = brickOnLine / 2 + 1;  // (10/2) +1 = 6
+        int centerLeft = brickPerLine / 2 - 1;   // (10/2) -1 = 4
+        int centerRight = brickPerLine / 2 + 1;  // (10/2) +1 = 6
 
-        double brickLen = drawArea.getWidth() / brickOnLine;    //length of each brick
+        double brickLen = drawArea.getWidth() / brickPerLine;    //length of each brick
         double brickHgt = brickLen / brickSizeRatio;    //height of the line
 
         brickCnt += lineCnt / 2;    //set brick count back to 31
@@ -123,11 +123,11 @@ public class Levels {
 
         int i;
         for(i = 0; i < tmp.length; i++){    //loop 31 times for all bricks
-            int line = i / brickOnLine;     //total will be 3 lines (line 0, 1, 2)
+            int line = i / brickPerLine;     //total will be 3 lines (line 0, 1, 2)
             if(line == lineCnt)             //if 3 ==3
                 break;                      //break for loop
             //set coordinate of brick
-            int posX = i % brickOnLine;
+            int posX = i % brickPerLine;
             double x = posX * brickLen;
             //line 0, 2 will set the coordinate for brick normally
             //line 1 will start with half of the brick
@@ -142,7 +142,7 @@ public class Levels {
         }
 
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){   //this loop specifically for the last brick in 2nd line (line 1)
-            double x = (brickOnLine * brickLen) - (brickLen / 2);
+            double x = (brickPerLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
             tmp[i] = makeBrick(p,brickSize,typeA);
         }
@@ -164,12 +164,12 @@ public class Levels {
     private Brick[] makeLastLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB, int typeC){
         brickCnt -= brickCnt % lineCnt; //set brickCnt to 30 because 31 - (31 % 3) = 1
 
-        int brickOnLine = brickCnt / lineCnt;   //num of brick per line (changed to brickPerLine) ,30/3 = 10
+        int brickPerLine = brickCnt / lineCnt;   //num of brick per line (changed to brickPerLine) ,30/3 = 10
 
-        int centerLeft = brickOnLine / 2 - 1;   // (10/2) -1 = 4
-        int centerRight = brickOnLine / 2 + 1;  // (10/2) +1 = 6
+        int centerLeft = brickPerLine / 2 - 1;   // (10/2) -1 = 4
+        int centerRight = brickPerLine / 2 + 1;  // (10/2) +1 = 6
 
-        double brickLen = drawArea.getWidth() / brickOnLine;    //length of each brick
+        double brickLen = drawArea.getWidth() / brickPerLine;    //length of each brick
         double brickHgt = brickLen / brickSizeRatio;    //height of the line
 
         brickCnt += lineCnt / 2;    //set brick count back to 31
@@ -181,11 +181,11 @@ public class Levels {
 
         int i;
         for(i = 0; i < tmp.length; i++){    //loop 31 times for all bricks
-            int line = i / brickOnLine;     //total will be 3 lines (line 0, 1, 2)
+            int line = i / brickPerLine;     //total will be 3 lines (line 0, 1, 2)
             if(line == lineCnt)             //if 3 ==3
                 break;                      //break for loop
             //set coordinate of brick
-            int posX = i % brickOnLine;
+            int posX = i % brickPerLine;
             double x = posX * brickLen;
             //line 0, 2 will set the coordinate for brick normally
             //line 1 will start with half of the brick
@@ -216,7 +216,7 @@ public class Levels {
         }
 
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){   //this loop specifically for the last brick in 2nd line (line 1)
-            double x = (brickOnLine * brickLen) - (brickLen / 2);
+            double x = (brickPerLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
             tmp[i] = makeBrick(p,brickSize,typeA);
         }

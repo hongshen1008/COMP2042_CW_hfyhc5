@@ -5,7 +5,6 @@ import GameObject.Ball;
 import java.awt.*;
 import java.awt.Point;
 import java.awt.geom.Point2D;
-import java.util.Random;
 
 /**
  * This is Abstract Brick class. Designs brick and contains brick operations.
@@ -24,8 +23,7 @@ abstract public class Brick  {
     public static final int LEFT_IMPACT = 300;
     public static final int RIGHT_IMPACT = 400;
 
-    private static Random rnd;
-    Shape brickFace;
+    protected Shape brickFace;
 
     private Color border;
     private Color inner;
@@ -46,7 +44,6 @@ abstract public class Brick  {
      * @param strength  represents the brick strength
      */
     public Brick(Point pos,Dimension size,Color border,Color inner,int strength){   //brick constructor
-        rnd = new Random();
         broken = false;
         brickFace = makeBrickFace(pos,size);
         this.border = border;
@@ -153,16 +150,6 @@ abstract public class Brick  {
         strength--;
         broken = (strength == 0);   //if strength == 0, set broken to true else false
     }
-
-    /**
-     * This method is used to get random values.
-     *
-     * @return random values.
-     */
-    public static Random getRnd() {
-        return rnd;
-    }
-
 
 }
 

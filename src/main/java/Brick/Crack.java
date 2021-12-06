@@ -3,6 +3,7 @@ package Brick;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
+import java.util.Random;
 
 /**
  * This is Crack class. Draw crack and perform crack operations.
@@ -19,7 +20,7 @@ public class Crack{
         public static final int DOWN = 40;
         public static final int VERTICAL = 100;
         public static final int HORIZONTAL = 200;
-
+        private static Random rnd;
         private GeneralPath crack;
 
         private int crackDepth;
@@ -37,6 +38,7 @@ public class Crack{
         public Crack(Brick brick, int crackDepth, int steps){    //constructor, crackDepth = 1, steps = 35
 
             crack = new GeneralPath();
+            rnd = new Random();
             this.crackDepth = crackDepth;
             this.steps = steps;
             this.brick = brick;
@@ -132,7 +134,7 @@ public class Crack{
      */
         private int randomInBounds(int bound){  //bound == 1
             int n = (bound * 2) + 1;
-            return Brick.getRnd().nextInt(n) - bound;
+            return rnd.nextInt(n) - bound;
         }
 
     /**
@@ -150,11 +152,11 @@ public class Crack{
 
             switch(direction){
                 case HORIZONTAL:
-                    pos = Brick.getRnd().nextInt(to.x - from.x) + from.x;
+                    pos = rnd.nextInt(to.x - from.x) + from.x;
                     out.setLocation(pos,to.y);
                     break;
                 case VERTICAL:
-                    pos = Brick.getRnd().nextInt(to.y - from.y) + from.y;
+                    pos = rnd.nextInt(to.y - from.y) + from.y;
                     out.setLocation(to.x,pos);
                     break;
             }
