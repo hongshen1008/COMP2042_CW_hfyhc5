@@ -50,7 +50,7 @@ public class Player {
      * @param height    represents the height of player bar
      * @param container represents the area of the frame
      */
-    public Player(Point ballPoint,int width,int height,Rectangle container) {   //player constructor
+    public Player(Point ballPoint,int width,int height,Rectangle container) {   //player constructor (300,430), 150, 10, (0,0,600,450)
         this.ballPoint = ballPoint;
         stop();                           //change movement to stop method
         this.playerFace = makeRectangle(width, height); //put this
@@ -67,8 +67,8 @@ public class Player {
      * @return  return (x,y) coordinate space, width and height to form rectangle shape
      */
     private Rectangle makeRectangle(int width,int height){  //construct rectangle for player bar
-        Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
-        return  new Rectangle(p,new Dimension(width,height));   //point, dimension
+        Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY()); //(225,430)
+        return  new Rectangle(p,new Dimension(width,height));   //point(225, 430), dimension (150, 10)
     }
 
     /**
@@ -115,7 +115,7 @@ public class Player {
      * This method is used to set the move amount of the player bar.
      * Move player bar to the right.
      */
-    public void movRight(){
+    public void moveRight(){
         moveAmount = DEF_MOVE_AMOUNT;
     }
 
@@ -134,5 +134,13 @@ public class Player {
      */
     public Shape getPlayerFace(){
         return playerFace;
+    }
+
+    public int getMoveAmount(){
+        return moveAmount;
+    }
+
+    public void setMoveAmount(int moveAmount) {
+        this.moveAmount = moveAmount;
     }
 }

@@ -65,7 +65,7 @@ public class TitaniumBrick extends Brick{
      * @param dir   represents the direction of the brick crack
      * @return      true if the brick is not broken
      */
-    public  boolean setImpact(Point2D point, int dir){
+    public boolean setImpact(Point2D point, int dir){
         if(super.isBroken())
             return false;
         impact();

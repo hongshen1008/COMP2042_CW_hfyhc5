@@ -82,10 +82,6 @@ public class Wall {
         area = drawArea;
     }
 
-    /*private void makeBall(Point2D ballPos){
-        this.ball = new RubberBall(ballPos);   // instantiate rubber ball class to set ball position
-    }*/
-
     /**
      * This method is used to determine the movement of player and ball.
      */
@@ -124,7 +120,7 @@ public class Wall {
      * This method is used to determine if the ball contact with which direction of the brick.
      * Different directions (UP, DOWN, LEFT, RIGHT) of the brick will lead to the different crack directions.
      *
-     * @return true if the ball contact with the brick.
+     * @return true if the ball contact with the brick
      */
     private boolean impactWall(){
         for(Brick b : bricks){
@@ -347,7 +343,7 @@ public class Wall {
     /**
      * This method is used to get bricks.
      *
-     * @return bricks to Brick class
+     * @return array of brick
      */
     public Brick[] getBricks() {
         return bricks;
@@ -356,7 +352,7 @@ public class Wall {
     /**
      * This method is used to get ball.
      *
-     * @return ball to Ball class
+     * @return the ball
      */
     public Ball getBall() {
         return ball;
@@ -365,7 +361,7 @@ public class Wall {
     /**
      * This method is used to get player bar.
      *
-     * @return player to player class
+     * @return the player
      */
     public Player getPlayer() {
         return player;
@@ -399,4 +395,5 @@ public class Wall {
     public void setScore(int score) {
         this.score = score;
     }
+
 }

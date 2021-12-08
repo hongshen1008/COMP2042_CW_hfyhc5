@@ -74,7 +74,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     /**
      * This is GameBoard constructor. Perform instantiation and initialise variables.
      *
-     * @param owner variable of JFrame, used to perform JFrame operations.
+     * @param owner variable of JFrame, used to perform JFrame operations
      */
     public GameBoard(JFrame owner){
         super();
@@ -167,7 +167,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     /**
      * This method is used to deign the game objects and Pause menu.
      *
-     * @param g variable of Graphics class used for drawing content.
+     * @param g represents Graphics class used for drawing content
      */
     public void paint(Graphics g){  //repaint
 
@@ -197,7 +197,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     /**
      * This method is used to clear the background and set background to white color.
      *
-     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     * @param g2d represents Graphics2D class
      */
     private void clear(Graphics2D g2d){
         Color tmp = g2d.getColor();
@@ -387,7 +387,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                 wall.getPlayer().moveLeft();
                 break;
             case KeyEvent.VK_D:
-                wall.getPlayer().movRight();
+                wall.getPlayer().moveRight();
                 break;
             case KeyEvent.VK_ESCAPE:
                 showPauseMenu = !showPauseMenu; //make it true

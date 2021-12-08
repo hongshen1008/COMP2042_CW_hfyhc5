@@ -23,7 +23,7 @@ public class Levels {
      *
      * @param drawArea represents the area of the rectangle
      * @param brickCount represents number of bricks
-     * @param lineCount  represents the layers to form a wall
+     * @param lineCount  represents the layers of rows to form a wall
      * @param brickDimensionRatio represents the ratio of the height and width of a brick
      * @return Brick class
      */
@@ -43,7 +43,7 @@ public class Levels {
      *
      * @param drawArea represents the area of the rectangle
      * @param brickCnt represents number of bricks
-     * @param lineCnt  represents the layers to form a wall
+     * @param lineCnt  represents the layers of rows to form a wall
      * @param brickSizeRatio represents the ratio of the height and width of a brick
      * @param type represents type of bricks
      * @return brick class
@@ -93,7 +93,7 @@ public class Levels {
      *
      * @param drawArea represents the area of the rectangle
      * @param brickCnt represents number of bricks
-     * @param lineCnt  represents the layers to form a wall
+     * @param lineCnt  represents the layers of rows to form a wall
      * @param brickSizeRatio represents the ratio of the height and width of a brick
      * @param typeA represents type of bricks
      * @param typeB represents type of bricks
@@ -111,8 +111,8 @@ public class Levels {
         int centerLeft = brickPerLine / 2 - 1;   // (10/2) -1 = 4
         int centerRight = brickPerLine / 2 + 1;  // (10/2) +1 = 6
 
-        double brickLen = drawArea.getWidth() / brickPerLine;    //length of each brick
-        double brickHgt = brickLen / brickSizeRatio;    //height of the line
+        double brickLen = drawArea.getWidth() / brickPerLine;    //length of each brick (600/10 = 60)
+        double brickHgt = brickLen / brickSizeRatio;    //height of the line (60/3 = 20)
 
         brickCnt += lineCnt / 2;    //set brick count back to 31
 
@@ -154,7 +154,7 @@ public class Levels {
      *
      * @param drawArea represents the area of the rectangle
      * @param brickCnt represents number of bricks
-     * @param lineCnt  represents the layers to form a wall
+     * @param lineCnt  represents the layers of rows to form a wall
      * @param brickSizeRatio represents the ratio of the height and width of a brick
      * @param typeA represents type of bricks
      * @param typeB represents type of bricks
