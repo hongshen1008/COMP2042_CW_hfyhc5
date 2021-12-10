@@ -45,16 +45,11 @@ public class HomeMenu extends JComponent {
     private static final Color TEXT_COLOR = new Color(0, 0, 0);//changed to black
     private static final Color CLICKED_BUTTON_COLOR = Color.BLUE.darker();
     private static final Color CLICKED_TEXT = Color.BLUE.darker();
-    private static final int BORDER_SIZE = 5;
-    private static final float[] DASHES = {12,6};
 
     private Rectangle menuFace;
     private Rectangle startButton;
     private Rectangle exitButton;   //changed to exitButton
     private Rectangle guideButton;  //add guide button
-
-    private BasicStroke borderStoke;
-    private BasicStroke borderStoke_noDashes;
 
     private Font greetingsFont;
     private Font gameTitleFont;
@@ -70,7 +65,7 @@ public class HomeMenu extends JComponent {
     /**
      * This is HomeMenu constructor. Design HomeMenu and perform instantiation.
      *
-     * @param area represents the area of the game window.
+     * @param area represents the area of the game window
      */
     public HomeMenu(Dimension area){    //constructor, changed owner to gameFrame
 
@@ -84,8 +79,6 @@ public class HomeMenu extends JComponent {
         startButton = new Rectangle(btnDim);
         exitButton = new Rectangle(btnDim); //changed to exitButton
         guideButton = new Rectangle(btnDim); //instantiate infoButton
-        borderStoke = new BasicStroke(BORDER_SIZE,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND,0,DASHES,0);
-        borderStoke_noDashes = new BasicStroke(BORDER_SIZE,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);
 
         greetingsFont = new Font("Noto Mono",Font.PLAIN,25);
         gameTitleFont = new Font("Noto Mono",Font.BOLD,40);
@@ -96,9 +89,9 @@ public class HomeMenu extends JComponent {
 
 
     /**
-     * This method is used to call method to deign the contents of Home Menu.
+     * This method is used to call method to deign the contents of HomeMenu window.
      *
-     * @param g the variable of Graphics class used for drawing content.
+     * @param g the variable of Graphics class used for drawing content
      */
     public void paint(Graphics g){
         drawMenu((Graphics2D)g);
@@ -108,7 +101,7 @@ public class HomeMenu extends JComponent {
     /**
      * This method is used to design the content of the HomeMenu window.
      *
-     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class
      */
     public void drawMenu(Graphics2D g2d){
 
@@ -139,27 +132,20 @@ public class HomeMenu extends JComponent {
     /**
      * This method is used to design the background content and border of HomeMenu window.
      *
-     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class
      */
     private void drawContainer(Graphics2D g2d){
-        background = new ImageIcon(getClass().getResource("/BrickBreaker2.jpg")).getImage();
+        background = new ImageIcon(getClass().getResource("/BrickBreaker.jpg")).getImage();
         g2d.drawImage(background, 0,0,550,350,null);
         Color prev = g2d.getColor();
-        Stroke tmp = g2d.getStroke();
-
-        g2d.setStroke(borderStoke_noDashes);
-
         g2d.draw(menuFace);
-
-        g2d.setStroke(tmp);
-
         g2d.setColor(prev);
     }
 
     /**
      * This method is used to locate text in the HomeMenu window.
      *
-     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class
      */
     private void drawText(Graphics2D g2d){
 
@@ -197,7 +183,7 @@ public class HomeMenu extends JComponent {
     /**
      * This method is used to locate button in the HomeMenu window.
      *
-     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
+     * @param g2d variable of Graphics2D class to perform operations of Graphics2D class
      */
     private void drawButton(Graphics2D g2d){
 

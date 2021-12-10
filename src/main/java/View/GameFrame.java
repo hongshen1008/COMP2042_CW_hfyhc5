@@ -41,8 +41,6 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     private GameBoard gameBoard;
     private HomeMenu homeMenu;
     private HomeMenuController homeMenuController;
-    private GameBoardController gameBoardController;
-    private Wall wall;
 
     private boolean gaming;
 
@@ -57,8 +55,6 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setLayout(new BorderLayout());
 
         gameBoard = new GameBoard(this);    //instantiation
-
-        gameBoardController = new GameBoardController(wall, gameBoard);
 
         homeMenu = new HomeMenu(new Dimension(550,350));   //changed frame size
         homeMenuController = new HomeMenuController(this, homeMenu);

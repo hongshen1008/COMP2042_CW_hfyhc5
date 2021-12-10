@@ -29,7 +29,7 @@ public class GuideFrame extends JFrame implements ActionListener {
     public GuideFrame(){
         drawGuideMenu();
         enableButton();
-        image = new ImageIcon(getClass().getResource("/brick3.jpg"));
+        image = new ImageIcon(getClass().getResource("/guideImage.jpg"));
         background = new JLabel(image);
         background.setSize(FRAME_WIDTH,FRAME_HEIGHT);
         background.add(guideTitle);
@@ -57,8 +57,8 @@ public class GuideFrame extends JFrame implements ActionListener {
                 "5. You will be rewarded for 5 scores if you pass a level without losing any life. <br/><br/>" +
                 "<b>Game Controls: </b><br/>" +
                 "<b>SPACE</b> - start/pause the game. <br/>" +
-                "<b>A</b> - move left the player <br/>" +
-                "<b>D</b> - move right the player <br/>" +
+                "<b>A</b> - move the player bar left <br/>" +
+                "<b>D</b> - move the player bar right <br/>" +
                 "<b>ESC</b> - enter/exit pause menu <br/>" +
                 "<b>ALT+SHIFT+F1</b> - open console <br/><br/>" +
                 "Enjoy the game :) " + "</html>");

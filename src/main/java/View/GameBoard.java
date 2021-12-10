@@ -17,6 +17,7 @@
  */
 package View;
 
+import Controller.GameBoardController;
 import Model.Brick;
 import Model.Wall;
 import Model.Ball;
@@ -68,7 +69,7 @@ public class GameBoard extends JComponent {
     private int strLen;
 
     private DebugConsole debugConsole;
-
+    private GameBoardController gameBoardController;
 
     /**
      * This is GameBoard constructor. Perform instantiation and initialise variables.
@@ -80,7 +81,6 @@ public class GameBoard extends JComponent {
 
         strLen = 0;
         showPauseMenu = false;
-
         menuFont = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
         messageFont = new Font("MONOSPACED",Font.BOLD,13); //added message font
 
@@ -89,11 +89,10 @@ public class GameBoard extends JComponent {
         scoreMessage = "";
         highScore = "";
         wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));   //call wall constructor
-
+        gameBoardController = new GameBoardController(wall, this);
         debugConsole = new DebugConsole(owner,wall,this);   //call debugConsole constructor
-        //initialize the first level
-        wall.nextLevel();
 
+        wall.nextLevel();
         promptMessage();
 
     }
@@ -431,15 +430,6 @@ public class GameBoard extends JComponent {
      */
     public DebugConsole getDebugConsole(){
         return debugConsole;
-    }
-
-    /**
-     * This method is used to get message.
-     *
-     * @return message
-     */
-    public String getMessage() {
-        return message;
     }
 
     /**

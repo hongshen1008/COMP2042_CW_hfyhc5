@@ -17,7 +17,7 @@ import java.awt.event.*;
 public class GameBoardController {
 
     private GameBoard gameBoard;    //view
-    protected Wall wall;              //model
+    private Wall wall;              //model
 
     /**
      * This is GameBoardController class constructor. Construct object and initialise variables.
