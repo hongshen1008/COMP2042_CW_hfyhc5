@@ -27,16 +27,11 @@ class SteelBrickTest {
 
     @Test
     void setImpact() {
-        Point2D up = new Point2D.Double(494.0,37.0);
-        Random rnd = new Random();
+        Point2D up = new Point2D.Double(495.0,40.0);
         steelBrick.setImpact(up, Crack.DOWN);
         if(steelBrick.isBroken())
         {
             assertFalse(steelBrick.setImpact(up, Crack.DOWN));
-        }
-        if(rnd.nextDouble() < 0.5)
-        {
-            assertTrue(steelBrick.setImpact(up, Crack.DOWN));
         }
 
     }

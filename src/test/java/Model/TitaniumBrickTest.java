@@ -27,16 +27,11 @@ class TitaniumBrickTest {
 
     @Test
     void setImpact() {
-        Point2D up = new Point2D.Double(494.0,37.0);
-        Random rnd = new Random();
+        Point2D up = new Point2D.Double(495.0,30.0);
         titaniumBrick.setImpact(up, Crack.DOWN);
         if(titaniumBrick.isBroken())
         {
             assertFalse(titaniumBrick.setImpact(up, Crack.DOWN));
-        }
-        if(rnd.nextDouble() < 0.35)
-        {
-            assertTrue(titaniumBrick.setImpact(up, Crack.DOWN));
         }
     }
 

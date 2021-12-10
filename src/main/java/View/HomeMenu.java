@@ -158,6 +158,7 @@ public class HomeMenu extends JComponent {
 
     /**
      * This method is used to locate text in the HomeMenu window.
+     *
      * @param g2d variable of Graphics2D class to perform operations of Graphics2D class.
      */
     private void drawText(Graphics2D g2d){
@@ -288,59 +289,112 @@ public class HomeMenu extends JComponent {
 
     }
 
-    /*
-     * This is a built-in method used to detect mouse clicked in HomeMenu window.
-     * If the user clicked on start button, the game starts.
-     * If the user clicked on Exit Button, the program stops and exits.
-     * If the user clicked on Guide Button, it pops up Guide Window.
+
+    /**
+     * This method is used to display actions perform when user mouse clicked.
      *
-     * @param mouseEvent represents MouseEvent class to detect mouse action.
+     * @param mouseEvent represents mouse event
      */
     public void addMouseEvent(MouseListener mouseEvent) {
         this.addMouseListener(mouseEvent);
     }
 
+    /**
+     * This method is used to display actions perform when user moving their mouse.
+     *
+     * @param mouseEvent represents mouse event
+     */
     public void AddMouseMotionListener(MouseMotionListener mouseEvent) {
         this.addMouseMotionListener(mouseEvent);
     }
 
+    /**
+     * This method is used to get start button.
+     *
+     * @return represents start button
+     */
     public Rectangle getStartButton() {
         return startButton;
     }
 
+    /**
+     * This method is used to get exit button.
+     *
+     * @return represents exit button
+     */
     public Rectangle getExitButton() {
         return exitButton;
     }
 
+    /**
+     * This method is used to get guide button.
+     *
+     * @return represents guide button
+     */
     public Rectangle getGuideButton() {
         return guideButton;
     }
 
+    /**
+     * This method is used to design buttons when button is clicked.
+     *
+     * @param button represents button
+     */
     public void Repaint(Rectangle button){
         repaint(button.x,button.y,button.width+1,button.height+1);
     }
 
 
+    /**
+     * This method is to get if the start button is clicked.
+     *
+     * @return true if start button is clicked
+     */
     public boolean isStartClicked() {
         return startClicked;
     }
 
+    /**
+     * This method is to set the start button to true if the button is clicked.
+     *
+     * @param startClicked represents start button action
+     */
     public void setStartClicked(boolean startClicked) {
         this.startClicked = startClicked;
     }
 
+    /**
+     * This method is to get if the exit button is clicked.
+     *
+     * @return true if exit button is clicked
+     */
     public boolean isExitClicked() {
         return exitClicked;
     }
 
+    /**
+     * This method is to set the exit button to true if the button is clicked.
+     *
+     * @param exitClicked represents exit button action
+     */
     public void setExitClicked(boolean exitClicked) {
         this.exitClicked = exitClicked;
     }
 
+    /**
+     * This method is to get if the guide button is clicked.
+     *
+     * @return true if guide button is clicked
+     */
     public boolean isGuideClicked() {
         return guideClicked;
     }
 
+    /**
+     * This method is to set the guide button to true if the button is clicked.
+     *
+     * @param guideClicked represents guide button action
+     */
     public void setGuideClicked(boolean guideClicked) {
         this.guideClicked = guideClicked;
     }

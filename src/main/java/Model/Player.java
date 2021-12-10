@@ -136,10 +136,20 @@ public class Player {
         return playerFace;
     }
 
+    /**
+     * This method is used to move amount.
+     *
+     * @return move amount
+     */
     public int getMoveAmount(){
         return moveAmount;
     }
 
+    /**
+     * This method is used to set move amount.
+     *
+     * @param moveAmount represents move amount
+     */
     public void setMoveAmount(int moveAmount) {
         this.moveAmount = moveAmount;
     }
