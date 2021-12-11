@@ -45,7 +45,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     private boolean gaming;
 
     /**
-     * GameFrame constructor. Initialise variables, design GameFrame and instantiate GameBoard & HomeMenu class.
+     * GameFrame constructor. Initialise variables, design GameFrame and instantiate GameBoard and HomeMenu class.
      */
     public GameFrame(){
         super();
