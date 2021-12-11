@@ -20,8 +20,8 @@ Overall rearranged code structure (shorter method in the bottom) and deleted ext
 6. Extract Crack class to an independent class.
 
 #### Crack class
-1. Remove "CRACK_SECTIONS" and "JUMP_PROBABILITY" variable.
-2. Remove unused inMiddle() and jumps() methods.
+1. Removed "CRACK_SECTIONS" and "JUMP_PROBABILITY" variable.
+2. Removed unused inMiddle() and jumps() methods.
 
 #### Player class
 1. Changed "moveAmount" variable initialisation to call stop() method. (line 55) 
@@ -29,16 +29,16 @@ Overall rearranged code structure (shorter method in the bottom) and deleted ext
 3. Encapsulate field "moveAmount". (line 144, 153)
 
 #### Wall class
-1. New method "initialiseSpeed()" to fix ball speed in every levels.(line 160)
-2. Encapsulate fields "bricks, ball, player". (line 344, 353, 362)
-3. Instantiate RubberBall class in initialiseSpeed(). (line 161)
-4. In ballReset() method, fix ball speed instead of random speed. (line 171)
+1. New method "initialiseSpeed()" to fix ball speed in the beginning of every levels.(line 159)
+2. Encapsulate fields "bricks, ball, player". (line 342, 351, 360)
+3. Instantiate RubberBall class in constructor.
+4. In ballReset() method, fix ball speed instead of random speed. In nextLevel() method, call initialiseSpeed().
 5. Removed rnd variable and operations in constructor and ballReset() method.
 6. Extract levels operations to the new Levels class. 
 7. Removed variables "LEVEL_COUNT, CLAY, STEEL, CEMENT" and moved to Levels class.
 8. Added composition relationship, "private Levels level" variable and instantiation.
-9. Renamed "private Brick[][] level" variable to "brick_level" (line 40).
-10. Renamed "private int level" variable to "tmp_level" (line 41)
+9. Renamed "private Brick[][] level" variable to "brick_level".
+10. Renamed "private int level" variable to "tmp_level".
 11. In impactWall() method, changed Crack.RIGHT to Crack.LEFT and vice versa. (line 135 & 138)
 
 #### Levels class
@@ -49,7 +49,6 @@ Overall rearranged code structure (shorter method in the bottom) and deleted ext
 
 #### DebugPanel class
 1. Encapsulate fields "ballXSpeed, ballYSpeed". (line 151, 160)
-2. Extract action events to DebugPanelController class.
 
 #### GameBoard class
 1. Instantiate GameBoardController class.

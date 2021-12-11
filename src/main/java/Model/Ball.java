@@ -5,7 +5,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
 
 /**
- * This is abstract Ball class, used to determine locations of ball during ball movements.
+ * This is Abstract Ball class.
+ * Determine locations of ball during ball movements.
  *
  * @author Chin Hong Shen
  * @version 0.2

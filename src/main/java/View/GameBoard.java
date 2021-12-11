@@ -31,7 +31,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.font.FontRenderContext;
 
 /**
- * This is GameBoardView class, used to display game play and Pause Menu window.
+ * This is GameBoardView class.
+ * Display game play and Pause Menu window.
  *
  * @author Chin Hong Shen
  * @version 0.2
@@ -115,7 +116,7 @@ public class GameBoard extends JComponent {
         gameTimer = new Timer(10,e ->{
             wall.move();
             wall.findImpacts();
-            message = String.format("Bricks: %d Balls %d ",wall.getBrickCount(),wall.getBallCount());
+            message = String.format("Bricks: %d | Balls: %d ",wall.getBrickCount(),wall.getBallCount());
             scoreMessage = String.format("Score: %d", wall.getScore());
             highScore = String.format("High Score: " + wall.getHighScore());
             if(wall.isBallLost()){

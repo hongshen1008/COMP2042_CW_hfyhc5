@@ -8,7 +8,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * This is GameBoardController class, used to perform action events and update to view class.
+ * This is GameBoardController class.
+ * Perform action events and update to view class.
  *
  * @author Chin Hong Shen
  * @version 0.2

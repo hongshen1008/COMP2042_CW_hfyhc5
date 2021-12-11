@@ -10,26 +10,24 @@ import static org.junit.jupiter.api.Assertions.*;
 class WallTest {
 
     Wall wall = new Wall(new Rectangle(0,0,600,450),30,3,6/2,new Point(300,430));
-    Player player = new Player(new Point(300,430),150,10,new Rectangle(0,0,600,450));
     RubberBall ball = new RubberBall(new Point(300,430));
 
     @Test
     void move() {
-        player.move();
-        ball.move();
-        assertNotNull(player);
-        assertNotNull(ball);
+        wall.move();
+        assertEquals(new Point2D.Double(304.0,426.0),wall.getBall().getPosition());
     }
 
     @Test
     void findImpacts() {
+        wall.setBallXSpeed(4);
         wall.findImpacts();
-        assertEquals(0,ball.getSpeedY());
+        assertEquals(4,wall.getBall().getSpeedX());
     }
 
     @Test
     void initialiseSpeed() {
-        wall.initialiseSpeed(new Point2D.Double(300.0,430.0));
+        wall.initialiseSpeed();
         ball.setSpeed(4,-4);
         assertEquals(-4,ball.getSpeedY());
     }

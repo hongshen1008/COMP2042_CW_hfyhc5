@@ -65,7 +65,8 @@ public class Wall {
         tmp_level = 0;
         this.score = 0;    //set score
         ballCount = 3;
-        initialiseSpeed(ballPos);
+        ball = new RubberBall(ballPos);
+        initialiseSpeed();
         ballLost = false;
 
         this.player = new Player((Point) ballPos.clone(),150,10, drawArea);     //instantiate player class
@@ -154,11 +155,8 @@ public class Wall {
     /**
      * This method is used to initialise the ball speed in the beginning of the game.
      * Instantiate RubberBall class.
-     *
-     * @param ballPos represents the ball position.
      */
-    public void initialiseSpeed(Point2D ballPos){
-        ball = new RubberBall(ballPos);
+    public void initialiseSpeed(){
         int speedX = 4, speedY = -4;
         ball.setSpeed(speedX,speedY);
 
@@ -172,8 +170,7 @@ public class Wall {
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
 
-        int speedX = 4, speedY = -4;
-        ball.setSpeed(speedX,speedY);
+        initialiseSpeed();
         ballLost = false;
     }
 
@@ -273,6 +270,7 @@ public class Wall {
     public void nextLevel(){
         this.bricks = brick_level[tmp_level++];
         this.brickCount = bricks.length;
+        initialiseSpeed();
     }
 
     /**

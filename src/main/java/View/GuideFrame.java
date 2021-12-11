@@ -6,7 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * GuideFrame class to open Guide window when pressed on Guide button.
+ * This is GuideFrame class.
+ * Open Guide window when pressed on Guide button.
  *
  * @author Chin Hong Shen
  * @version 0.2

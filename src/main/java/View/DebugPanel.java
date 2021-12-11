@@ -59,8 +59,8 @@ public class DebugPanel extends JPanel {      //windows to control level and spe
         skipLevel = new JButton("Skip Level");
         resetBalls = new JButton("Reset Balls");
 
-        ballXSpeed = makeSlider(2,6);
-        ballYSpeed = makeSlider(2,6);
+        ballXSpeed = makeSlider(2,6);   //changed to (2 - 6)
+        ballYSpeed = makeSlider(2,6);   //changed to (2 - 6)
 
         this.add(skipLevel);
         this.add(resetBalls);
