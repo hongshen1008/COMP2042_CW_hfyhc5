@@ -67,7 +67,7 @@ public class HomeMenu extends JComponent {
      *
      * @param area represents the area of the game window
      */
-    public HomeMenu(Dimension area){    //constructor, changed owner to gameFrame
+    public HomeMenu(Dimension area){    //constructor
 
         this.setFocusable(true);
         this.requestFocusInWindow();

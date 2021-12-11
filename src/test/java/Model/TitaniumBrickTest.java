@@ -33,6 +33,10 @@ class TitaniumBrickTest {
         {
             assertFalse(titaniumBrick.setImpact(up, Crack.DOWN));
         }
+        titaniumBrick.impact();
+        if(!titaniumBrick.isBroken()){
+            assertFalse(titaniumBrick.setImpact(up,Crack.DOWN));
+        }
     }
 
     @Test

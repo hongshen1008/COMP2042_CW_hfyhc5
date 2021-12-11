@@ -18,7 +18,6 @@ public class GuideFrame extends JFrame implements ActionListener {
     private static final int FRAME_HEIGHT = 500;  //frame height
     private JLabel guideTitle;
     private JButton backButton;
-    private GameFrame gameFrame;
     private ImageIcon image;
     private JLabel background;
 
@@ -88,7 +87,6 @@ public class GuideFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==backButton){
             dispose();
-            gameFrame = new GameFrame();
         }
     }
 

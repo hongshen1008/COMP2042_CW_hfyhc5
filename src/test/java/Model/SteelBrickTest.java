@@ -33,6 +33,10 @@ class SteelBrickTest {
         {
             assertFalse(steelBrick.setImpact(up, Crack.DOWN));
         }
+        steelBrick.impact();
+        if(!steelBrick.isBroken()){
+            assertFalse(steelBrick.setImpact(up,Crack.DOWN));
+        }
 
     }
 

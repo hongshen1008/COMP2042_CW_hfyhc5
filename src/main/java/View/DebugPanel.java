@@ -128,7 +128,6 @@ public class DebugPanel extends JPanel {      //windows to control level and spe
         out.setMajorTickSpacing(1);
         out.setSnapToTicks(true);
         out.setPaintTicks(true);
-        //out.addChangeListener(e);
         return out;
     }
 

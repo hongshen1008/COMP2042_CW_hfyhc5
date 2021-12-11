@@ -68,7 +68,7 @@ abstract public class Ball {
      */
     public void move(){
         center.setLocation((center.getX() + speedX),(center.getY() + speedY));
-        getFrameCenter();
+        getCenter();
     }
 
     /**
@@ -78,14 +78,14 @@ abstract public class Ball {
      */
     public void moveTo(Point p){
         center.setLocation(p);
-        getFrameCenter();
+        getCenter();
 
     }
 
     /**
      * This method is to set ball in the center location of the frame.
      */
-    private void getFrameCenter(){
+    private void getCenter(){
         RectangularShape tmp = (RectangularShape) ballFace;
         double w = tmp.getWidth();
         double h = tmp.getHeight();

@@ -98,7 +98,7 @@ public class Player {
      *
      * @param p represents the start point of the player bar.
      */
-    public void moveTo(Point p){    //player go to center, reordered code structure
+    public void moveTo(Point p){    //player go to center
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
