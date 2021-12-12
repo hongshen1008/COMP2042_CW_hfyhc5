@@ -76,7 +76,7 @@ Overall rearranged code structure (shorter method in the bottom) and deleted ext
 1. New TitaniumBrick class.
 
 #### GameBoard class
-1. Added message font and moved the messages to upper left corner.
+1. Added message font and moved the messages to upper left corner. (line 86,175,176,177)
 2. Added Guide button in PauseMenu.
 3. Reward and penalty in promptMessage() method.
 
