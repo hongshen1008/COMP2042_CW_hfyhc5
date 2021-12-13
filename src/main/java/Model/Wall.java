@@ -268,9 +268,13 @@ public class Wall {
      * This method is used to set next level.
      */
     public void nextLevel(){
-        this.bricks = brick_level[tmp_level++];
-        this.brickCount = bricks.length;
-        initialiseSpeed();
+        if(hasLevel())
+        {
+            this.bricks = brick_level[tmp_level++];
+            this.brickCount = bricks.length;
+            initialiseSpeed();
+        }
+
     }
 
     /**
