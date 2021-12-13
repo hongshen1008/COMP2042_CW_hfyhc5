@@ -40,6 +40,7 @@ Overall rearranged code structure (shorter method in the bottom) and deleted ext
 9. Renamed "private Brick[][] level" variable to "brick_level".
 10. Renamed "private int level" variable to "tmp_level".
 11. In impactWall() method, changed Crack.RIGHT to Crack.LEFT and vice versa. (line 135 & 138)
+12. Added hasLevel() method inside nextLevel() method. (Line 271)
 
 #### Levels class
 1. Rename variable "brickOnLine" to "brickPerline".
